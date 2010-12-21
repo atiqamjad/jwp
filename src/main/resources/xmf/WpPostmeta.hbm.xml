@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 21.12.2010 7:24:07 by Hibernate Tools 3.4.0.Beta1 -->
+<hibernate-mapping>
+    <class name="com.samsonych.model.wp.WpPostmeta" table="wp_postmeta" catalog="gads_wp">
+        <id name="metaId" type="java.lang.Long">
+            <column name="meta_id" />
+            <generator class="identity" />
+        </id>
+        <property name="postId" type="long">
+            <column name="post_id" not-null="true" />
+        </property>
+        <property name="metaKey" type="string">
+            <column name="meta_key" />
+        </property>
+        <property name="metaValue" type="string">
+            <column name="meta_value" />
+        </property>
+    </class>
+</hibernate-mapping>

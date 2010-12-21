@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 21.12.2010 7:24:07 by Hibernate Tools 3.4.0.Beta1 -->
+<hibernate-mapping>
+    <class name="com.samsonych.model.wp.WpComments" table="wp_comments" catalog="gads_wp">
+        <id name="commentId" type="java.lang.Long">
+            <column name="comment_ID" />
+            <generator class="identity" />
+        </id>
+        <property name="commentPostId" type="long">
+            <column name="comment_post_ID" not-null="true" />
+        </property>
+        <property name="commentAuthor" type="string">
+            <column name="comment_author" not-null="true" />
+        </property>
+        <property name="commentAuthorEmail" type="string">
+            <column name="comment_author_email" length="100" not-null="true" />
+        </property>
+        <property name="commentAuthorUrl" type="string">
+            <column name="comment_author_url" length="200" not-null="true" />
+        </property>
+        <property name="commentAuthorIp" type="string">
+            <column name="comment_author_IP" length="100" not-null="true" />
+        </property>
+        <property name="commentDate" type="timestamp">
+            <column name="comment_date" length="19" not-null="true" />
+        </property>
+        <property name="commentDateGmt" type="timestamp">
+            <column name="comment_date_gmt" length="19" not-null="true" />
+        </property>
+        <property name="commentContent" type="string">
+            <column name="comment_content" length="65535" not-null="true" />
+        </property>
+        <property name="commentKarma" type="int">
+            <column name="comment_karma" not-null="true" />
+        </property>
+        <property name="commentApproved" type="string">
+            <column name="comment_approved" length="20" not-null="true" />
+        </property>
+        <property name="commentAgent" type="string">
+            <column name="comment_agent" not-null="true" />
+        </property>
+        <property name="commentType" type="string">
+            <column name="comment_type" length="20" not-null="true" />
+        </property>
+        <property name="commentParent" type="long">
+            <column name="comment_parent" not-null="true" />
+        </property>
+        <property name="userId" type="long">
+            <column name="user_id" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

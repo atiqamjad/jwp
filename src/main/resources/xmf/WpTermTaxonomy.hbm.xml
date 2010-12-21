@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 21.12.2010 7:24:07 by Hibernate Tools 3.4.0.Beta1 -->
+<hibernate-mapping>
+    <class name="com.samsonych.model.wp.WpTermTaxonomy" table="wp_term_taxonomy" catalog="gads_wp">
+        <id name="termTaxonomyId" type="java.lang.Long">
+            <column name="term_taxonomy_id" />
+            <generator class="identity" />
+        </id>
+        <property name="termId" type="long">
+            <column name="term_id" not-null="true" />
+        </property>
+        <property name="taxonomy" type="string">
+            <column name="taxonomy" length="32" not-null="true" />
+        </property>
+        <property name="description" type="string">
+            <column name="description" not-null="true" />
+        </property>
+        <property name="parent" type="long">
+            <column name="parent" not-null="true" />
+        </property>
+        <property name="count" type="long">
+            <column name="count" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 21.12.2010 7:24:07 by Hibernate Tools 3.4.0.Beta1 -->
+<hibernate-mapping>
+    <class name="com.samsonych.model.wp.WpTerms" table="wp_terms" catalog="gads_wp">
+        <id name="termId" type="java.lang.Long">
+            <column name="term_id" />
+            <generator class="identity" />
+        </id>
+        <property name="name" type="string">
+            <column name="name" length="200" not-null="true" />
+        </property>
+        <property name="slug" type="string">
+            <column name="slug" length="200" not-null="true" unique="true" />
+        </property>
+        <property name="termGroup" type="long">
+            <column name="term_group" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

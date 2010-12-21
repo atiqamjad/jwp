@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+  <table catalog="gads_wp" name="wp_users" class="User"></table>
+  <table catalog="gads_wp" name="wp_postmeta" class="PostMeta"></table>
+  <table catalog="gads_wp" name="wp_terms" class="Term"></table>
+  <table catalog="gads_wp" name="wp_posts" class="Post"></table>
+  <table catalog="gads_wp" name="wp_commentmeta" class="CommentMeta"></table>
+  <table catalog="gads_wp" name="wp_term_taxonomy"></table>
+  <table catalog="gads_wp" name="wp_term_relationships" class="TermRelationship">
+  </table>
+  <table catalog="gads_wp" name="wp_links" class="Link"></table>
+  <table catalog="gads_wp" name="wp_options" class="Option"></table>
+  <table catalog="gads_wp" name="wp_comments" class="Comment"></table>
+  <table catalog="gads_wp" name="wp_usermeta" class="UserMeta"></table>
+</hibernate-reverse-engineering>

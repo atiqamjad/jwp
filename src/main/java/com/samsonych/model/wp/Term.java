@@ -2,9 +2,15 @@ package com.samsonych.model.wp;
 
 // Generated 21.12.2010 7:24:07 by Hibernate Tools 3.4.0.Beta1
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -17,57 +23,68 @@ import javax.persistence.UniqueConstraint;
 @Table(name = "wp_terms", uniqueConstraints = @UniqueConstraint(columnNames = "slug"))
 public class Term implements java.io.Serializable {
 
-	private static final long serialVersionUID = 4860621151071891850L;
-	private Long termId;
-	private String name;
-	private String slug;
-	private long termGroup;
+    private static final long serialVersionUID = 4860621151071891850L;
+    private Long termId;
+    private String name;
+    private String slug;
+    private long termGroup;
+    private TermTaxonomy taxonomy;
 
-	public Term() {
-	}
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @PrimaryKeyJoinColumn
+    public TermTaxonomy getTaxonomy() {
+        return taxonomy;
+    }
 
-	public Term(String name, String slug, long termGroup) {
-		this.name = name;
-		this.slug = slug;
-		this.termGroup = termGroup;
-	}
+    public void setTaxonomy(TermTaxonomy taxonomy) {
+        this.taxonomy = taxonomy;
+    }
 
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-	@Column(name = "term_id", unique = true, nullable = false)
-	public Long getTermId() {
-		return this.termId;
-	}
+    public Term() {
+    }
 
-	public void setTermId(Long termId) {
-		this.termId = termId;
-	}
+    public Term(String name, String slug, long termGroup) {
+        this.name = name;
+        this.slug = slug;
+        this.termGroup = termGroup;
+    }
 
-	@Column(name = "name", nullable = false, length = 200)
-	public String getName() {
-		return this.name;
-	}
+    @Id
+    @GeneratedValue(strategy = IDENTITY)
+    @Column(name = "term_id", unique = true, nullable = false)
+    public Long getTermId() {
+        return this.termId;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setTermId(Long termId) {
+        this.termId = termId;
+    }
 
-	@Column(name = "slug", unique = true, nullable = false, length = 200)
-	public String getSlug() {
-		return this.slug;
-	}
+    @Column(name = "name", nullable = false, length = 200)
+    public String getName() {
+        return this.name;
+    }
 
-	public void setSlug(String slug) {
-		this.slug = slug;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	@Column(name = "term_group", nullable = false)
-	public long getTermGroup() {
-		return this.termGroup;
-	}
+    @Column(name = "slug", unique = true, nullable = false, length = 200)
+    public String getSlug() {
+        return this.slug;
+    }
 
-	public void setTermGroup(long termGroup) {
-		this.termGroup = termGroup;
-	}
+    public void setSlug(String slug) {
+        this.slug = slug;
+    }
+
+    @Column(name = "term_group", nullable = false)
+    public long getTermGroup() {
+        return this.termGroup;
+    }
+
+    public void setTermGroup(long termGroup) {
+        this.termGroup = termGroup;
+    }
 
 }

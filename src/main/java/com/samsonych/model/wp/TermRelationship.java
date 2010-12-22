@@ -15,16 +15,16 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "wp_term_relationships")
-public class WpTermRelationship implements java.io.Serializable {
+public class TermRelationship implements java.io.Serializable {
 
 	private static final long serialVersionUID = 9159480990706478868L;
-	private WpTermRelationshipId id;
+	private TermRelationshipId id;
 	private int termOrder;
 
-	public WpTermRelationship() {
+	public TermRelationship() {
 	}
 
-	public WpTermRelationship(WpTermRelationshipId id, int termOrder) {
+	public TermRelationship(TermRelationshipId id, int termOrder) {
 		this.id = id;
 		this.termOrder = termOrder;
 	}
@@ -33,11 +33,11 @@ public class WpTermRelationship implements java.io.Serializable {
 	@AttributeOverrides({
 			@AttributeOverride(name = "objectId", column = @Column(name = "object_id", nullable = false)),
 			@AttributeOverride(name = "termTaxonomyId", column = @Column(name = "term_taxonomy_id", nullable = false)) })
-	public WpTermRelationshipId getId() {
+	public TermRelationshipId getId() {
 		return this.id;
 	}
 
-	public void setId(WpTermRelationshipId id) {
+	public void setId(TermRelationshipId id) {
 		this.id = id;
 	}
 

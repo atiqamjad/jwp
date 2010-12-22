@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                                         "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<!-- Annotated mapping classes -->
+		<mapping class="com.samsonych.model.wp.Comment" />
+		<mapping class="com.samsonych.model.wp.CommentMeta" />
+		<mapping class="com.samsonych.model.wp.Link" />
+		<mapping class="com.samsonych.model.wp.Option" />
+		<mapping class="com.samsonych.model.wp.Post" />
+		<mapping class="com.samsonych.model.wp.PostMeta" />
+		<mapping class="com.samsonych.model.wp.Term" />
+		<mapping class="com.samsonych.model.wp.TermRelationship" />
+		<mapping class="com.samsonych.model.wp.TermRelationshipId" />
+		<mapping class="com.samsonych.model.wp.TermTaxonomy" />
+		<mapping class="com.samsonych.model.wp.User" />
+		<mapping class="com.samsonych.model.wp.UserMeta" />
+	</session-factory>
+</hibernate-configuration>

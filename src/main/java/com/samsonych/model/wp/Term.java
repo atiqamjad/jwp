@@ -15,7 +15,7 @@ import javax.persistence.UniqueConstraint;
  */
 @Entity
 @Table(name = "wp_terms", uniqueConstraints = @UniqueConstraint(columnNames = "slug"))
-public class WpTerm implements java.io.Serializable {
+public class Term implements java.io.Serializable {
 
 	private static final long serialVersionUID = 4860621151071891850L;
 	private Long termId;
@@ -23,10 +23,10 @@ public class WpTerm implements java.io.Serializable {
 	private String slug;
 	private long termGroup;
 
-	public WpTerm() {
+	public Term() {
 	}
 
-	public WpTerm(String name, String slug, long termGroup) {
+	public Term(String name, String slug, long termGroup) {
 		this.name = name;
 		this.slug = slug;
 		this.termGroup = termGroup;

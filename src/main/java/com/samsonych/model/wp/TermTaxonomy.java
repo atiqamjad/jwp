@@ -16,7 +16,7 @@ import javax.persistence.UniqueConstraint;
 @Entity
 @Table(name = "wp_term_taxonomy", uniqueConstraints = @UniqueConstraint(columnNames = {
 		"term_id", "taxonomy" }))
-public class WpTermTaxonomy implements java.io.Serializable {
+public class TermTaxonomy implements java.io.Serializable {
 
 	private static final long serialVersionUID = -8899015337345756307L;
 	private Long termTaxonomyId;
@@ -26,10 +26,10 @@ public class WpTermTaxonomy implements java.io.Serializable {
 	private long parent;
 	private long count;
 
-	public WpTermTaxonomy() {
+	public TermTaxonomy() {
 	}
 
-	public WpTermTaxonomy(long termId, String taxonomy, String description,
+	public TermTaxonomy(long termId, String taxonomy, String description,
 			long parent, long count) {
 		this.termId = termId;
 		this.taxonomy = taxonomy;

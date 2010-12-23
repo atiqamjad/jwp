@@ -5,6 +5,8 @@ package com.samsonych.model.wp;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.JoinColumn;
@@ -26,7 +28,7 @@ public class TermTaxonomy implements java.io.Serializable {
     private static final long serialVersionUID = -8899015337345756307L;
     private Long termTaxonomyId;
     private Term term;
-    private String taxonomy;
+    private TaxonomyType taxonomyType;
     private String description;
     private long parent;
     private long count;
@@ -45,7 +47,7 @@ public class TermTaxonomy implements java.io.Serializable {
         this.termTaxonomyId = termTaxonomyId;
     }
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToOne(optional = false)
     @JoinColumn(name = "term_id", nullable = false)
     public Term getTerm() {
         return this.term;
@@ -56,12 +58,13 @@ public class TermTaxonomy implements java.io.Serializable {
     }
 
     @Column(name = "taxonomy", nullable = false, length = 32)
-    public String getTaxonomy() {
-        return this.taxonomy;
+    @Enumerated(EnumType.STRING)
+    public TaxonomyType getTaxonomyType() {
+        return this.taxonomyType;
     }
 
-    public void setTaxonomy(String taxonomy) {
-        this.taxonomy = taxonomy;
+    public void setTaxonomyType(TaxonomyType taxonomy) {
+        this.taxonomyType = taxonomy;
     }
 
     @Column(name = "description", nullable = false)

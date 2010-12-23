@@ -28,16 +28,16 @@ public class Term implements java.io.Serializable {
     private String name;
     private String slug;
     private long termGroup;
-    private TermTaxonomy taxonomy;
+    private TermTaxonomy termTaxonomy;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @PrimaryKeyJoinColumn
-    public TermTaxonomy getTaxonomy() {
-        return taxonomy;
+    @OneToOne(optional = false, mappedBy = "term", fetch = FetchType.LAZY)
+    // @PrimaryKeyJoinColumn
+    public TermTaxonomy getTermTaxonomy() {
+        return termTaxonomy;
     }
 
-    public void setTaxonomy(TermTaxonomy taxonomy) {
-        this.taxonomy = taxonomy;
+    public void setTermTaxonomy(TermTaxonomy taxonomy) {
+        this.termTaxonomy = taxonomy;
     }
 
     public Term() {

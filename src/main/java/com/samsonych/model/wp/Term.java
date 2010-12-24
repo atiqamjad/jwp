@@ -87,4 +87,9 @@ public class Term implements java.io.Serializable {
         this.termGroup = termGroup;
     }
 
+	@Override
+	public String toString() {
+		return String.format("Term [name=%s]", name);
+	}
+
 }

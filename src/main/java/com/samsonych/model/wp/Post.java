@@ -4,6 +4,7 @@ package com.samsonych.model.wp;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,7 +15,9 @@ import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapKeyColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -53,6 +56,21 @@ public class Post implements java.io.Serializable {
     private long commentCount;
 
     private List<Comment> comments;
+
+    private Map<Integer, TermTaxonomy> termTaxonomies;
+
+    @OneToMany
+    @JoinTable(name = "wp_term_relationships", 
+            joinColumns = @JoinColumn(name = "object_id", referencedColumnName = "ID"), 
+            inverseJoinColumns = @JoinColumn(name = "term_taxonomy_id", referencedColumnName = "term_taxonomy_id"))
+    @MapKeyColumn(name = "term_order")
+    public Map<Integer, TermTaxonomy> getTermTaxonomies() {
+        return termTaxonomies;
+    }
+
+    public void setTermTaxonomies(Map<Integer, TermTaxonomy> termTaxonomies) {
+        this.termTaxonomies = termTaxonomies;
+    }
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     public List<Comment> getComments() {

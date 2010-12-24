@@ -13,8 +13,8 @@ import javax.persistence.Table;
  * Posts are associated with categories and tags from the wp_terms table and
  * this association.
  */
-@Entity
-@Table(name = "wp_term_relationships")
+//@Entity
+//@Table(name = "wp_term_relationships")
 public class TermRelationship implements java.io.Serializable {
 
 	private static final long serialVersionUID = 9159480990706478868L;

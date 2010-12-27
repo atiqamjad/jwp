@@ -3,63 +3,84 @@
  */
 package com.samsonych.grabber;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileChannel.MapMode;
-import java.nio.charset.CharacterCodingException;
 import java.nio.charset.Charset;
-import java.nio.charset.CharsetDecoder;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
+
 /**
  * @author samsonov
- *
+ * 
  */
 public class GAdsGrabber {
 
-	private CharBuffer charBuffer;
+    private static Logger LOG = Logger.getLogger(GAdsGrabber.class);
 
-	public GAdsGrabber(File file) {
-		try {
-			FileInputStream fis = new FileInputStream(file);
-			FileChannel fc = fis.getChannel();
+    private CharBuffer charBuffer;
 
-			// Get a CharBuffer from the source file
-			ByteBuffer bb;
+    public GAdsGrabber(File file) {
+        LOG.debug(String.format("Grabing file - %s ", file.getAbsolutePath()));
+        try {
+            charBuffer = getBuffer(new FileInputStream(file));
+        } catch (FileNotFoundException ex) {
+            LOG.error(ex.getMessage(), ex);
+        }
+    }
 
-			bb = fc.map(MapMode.READ_ONLY, 0, (int) fc.size());
-			Charset cs = Charset.forName("8859_1");
-			CharsetDecoder cd = cs.newDecoder();
-			CharBuffer cb = cd.decode(bb);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+    private String findMatchFromCharBuffer(String regexp) {
+        Pattern p = Pattern.compile(regexp, Pattern.MULTILINE);
+        // Run some matches
+        Matcher m = p.matcher(charBuffer);
+        String result = null;
+        if (m.find()) {
+            result = m.group(1);
+        }
+        return result;
+    }
 
-	}
+    private CharBuffer getBuffer(InputStream is) {
+        try {
+            FileChannel fc = ((FileInputStream) is).getChannel();
+            // Get a CharBuffer from the source file
+            ByteBuffer bb = fc.map(MapMode.READ_ONLY, 0, (int) fc.size());
+            Charset cs = Charset.forName("8859_1");
+            return cs.newDecoder().decode(bb);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
-	private String findMatchFromCharBuffer(String regexp) {
-		Pattern p = Pattern.compile(regexp, Pattern.MULTILINE);
-		// Run some matches
-		Matcher m = p.matcher(charBuffer);
-		while (m.find())
-			System.out.println("Found comment: " + m.group());
-		return null;
-	}
+    /** Getting content of the post. */
+    public String getPostContent() {
+        String string = charBuffer.toString();
+        String startStr = "<?php include(\"inc/ads-top.inc\"); ?>";
+        String endStr = "<?php include(\"inc/ads-body.inc\"); ?>";
+        int startIndex = string.indexOf(startStr) + startStr.length();
+        int endIndex = string.indexOf(endStr);
+        //with delete CR's
+        String result = string.substring(startIndex, endIndex).replaceAll("\r|\n", "");
+        LOG.trace(String.format("post content [%s]", result));
+        LOG.debug("post content size = " + result.length());
+        return result;
+    }
 
-	public String getPostTitle() {
-		return findMatchFromCharBuffer("^<h1\\>(.*)<\\/h1>$");
-	}
-
-	public String getPostContent() {
-		return findMatchFromCharBuffer("php");
-	}
+    public String getPostTitle() {
+        String regexp = "^<h1\\>(.*)<\\/h1>$";
+        String result = findMatchFromCharBuffer(regexp);
+        LOG.debug(String.format("title post = '%s'", result));
+        return result;
+    }
 
 }

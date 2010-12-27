@@ -79,7 +79,7 @@
 	<!-- BUSINESS OBJECT DEFINITIONS -->
 
 	<bean id="baseDBManager"
-		class="isida.acps.service.dbaccess.core.dbmanager.BaseDBManagerImpl"
+		class="com.samsonych.service.dba.BaseDBManagerImpl"
 		scope="prototype">
 		<property name="baseDAO" ref="baseDAO" />
 	</bean>

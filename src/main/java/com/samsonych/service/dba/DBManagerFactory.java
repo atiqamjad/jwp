@@ -5,7 +5,7 @@
  *
  * Copyright (c) Isida-Informatica, Ltd. All Rights Reserved.
  */
-package com.samsonych.service;
+package com.samsonych.service.dba;
 
 /**
  * Фабрика DB-менеджеров (Spring Beans).

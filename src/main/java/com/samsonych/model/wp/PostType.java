@@ -8,5 +8,5 @@ package com.samsonych.model.wp;
  *
  */
 public enum PostType {
-	page, post
+	page, post, revision;
 }

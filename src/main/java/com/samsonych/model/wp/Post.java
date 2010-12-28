@@ -4,7 +4,6 @@ package com.samsonych.model.wp;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -18,8 +17,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapKeyColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -76,7 +75,8 @@ public class Post implements java.io.Serializable {
 	private String postTitle;
 
 	private PostType postType;
-	private Map<Integer, TermTaxonomy> termTaxonomies;
+	// private Map<Integer, TermTaxonomy> termTaxonomies;
+	private List<TermTaxonomy> termTaxonomies;
 	private String toPing;
 
 	public Post() {
@@ -227,8 +227,9 @@ public class Post implements java.io.Serializable {
 
 	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	@JoinTable(name = "wp_term_relationships", joinColumns = @JoinColumn(name = "object_id", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "term_taxonomy_id", referencedColumnName = "term_taxonomy_id"))
-	@MapKeyColumn(name = "term_order")
-	public Map<Integer, TermTaxonomy> getTermTaxonomies() {
+	// @MapKeyColumn(name = "term_order")
+	@OrderColumn(name = "term_order", insertable = true, nullable = false)
+	public List<TermTaxonomy> getTermTaxonomies() {
 		return termTaxonomies;
 	}
 
@@ -339,7 +340,7 @@ public class Post implements java.io.Serializable {
 		this.postType = postType;
 	}
 
-	public void setTermTaxonomies(Map<Integer, TermTaxonomy> termTaxonomies) {
+	public void setTermTaxonomies(List<TermTaxonomy> termTaxonomies) {
 		this.termTaxonomies = termTaxonomies;
 	}
 

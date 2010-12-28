@@ -23,69 +23,68 @@ import javax.persistence.UniqueConstraint;
 @Table(name = "wp_terms", uniqueConstraints = @UniqueConstraint(columnNames = "slug"))
 public class Term implements java.io.Serializable {
 
-    private static final long serialVersionUID = 4860621151071891850L;
-    private Long termId;
-    private String name;
-    private String slug;
-    private long termGroup;
-    private TermTaxonomy termTaxonomy;
+	private static final long serialVersionUID = 4860621151071891850L;
+	private Long termId;
+	private String name;
+	private String slug;
+	private long termGroup;
+	private TermTaxonomy termTaxonomy;
 
-    @OneToOne(optional = false, mappedBy = "term", fetch = FetchType.LAZY)
-    // @PrimaryKeyJoinColumn
-    public TermTaxonomy getTermTaxonomy() {
-        return termTaxonomy;
-    }
+	@OneToOne(optional = false, mappedBy = "term", fetch = FetchType.LAZY)
+	// @PrimaryKeyJoinColumn
+	public TermTaxonomy getTermTaxonomy() {
+		return termTaxonomy;
+	}
 
-    public void setTermTaxonomy(TermTaxonomy taxonomy) {
-        this.termTaxonomy = taxonomy;
-    }
+	public void setTermTaxonomy(TermTaxonomy taxonomy) {
+		this.termTaxonomy = taxonomy;
+	}
 
-    public Term() {
-    }
+	public Term() {
+	}
 
-    public Term(String name, String slug, long termGroup) {
-        this.name = name;
-        this.slug = slug;
-        this.termGroup = termGroup;
-    }
+	public Term(String name, String slug) {
+		this.name = name;
+		this.slug = slug;
+	}
 
-    @Id
-    @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "term_id", unique = true, nullable = false)
-    public Long getTermId() {
-        return this.termId;
-    }
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "term_id", unique = true, nullable = false)
+	public Long getTermId() {
+		return this.termId;
+	}
 
-    public void setTermId(Long termId) {
-        this.termId = termId;
-    }
+	public void setTermId(Long termId) {
+		this.termId = termId;
+	}
 
-    @Column(name = "name", nullable = false, length = 200)
-    public String getName() {
-        return this.name;
-    }
+	@Column(name = "name", nullable = false, length = 200)
+	public String getName() {
+		return this.name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    @Column(name = "slug", unique = true, nullable = false, length = 200)
-    public String getSlug() {
-        return this.slug;
-    }
+	@Column(name = "slug", unique = true, nullable = false, length = 200)
+	public String getSlug() {
+		return this.slug;
+	}
 
-    public void setSlug(String slug) {
-        this.slug = slug;
-    }
+	public void setSlug(String slug) {
+		this.slug = slug;
+	}
 
-    @Column(name = "term_group", nullable = false)
-    public long getTermGroup() {
-        return this.termGroup;
-    }
+	@Column(name = "term_group", nullable = false)
+	public long getTermGroup() {
+		return this.termGroup;
+	}
 
-    public void setTermGroup(long termGroup) {
-        this.termGroup = termGroup;
-    }
+	public void setTermGroup(long termGroup) {
+		this.termGroup = termGroup;
+	}
 
 	@Override
 	public String toString() {

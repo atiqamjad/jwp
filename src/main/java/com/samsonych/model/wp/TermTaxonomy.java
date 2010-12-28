@@ -34,6 +34,11 @@ public class TermTaxonomy implements java.io.Serializable {
 	public TermTaxonomy() {
 	}
 
+	public TermTaxonomy(Term term, TaxonomyType taxonomyType) {
+		this.term = term;
+		this.taxonomyType = taxonomyType;
+	}
+
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "term_taxonomy_id", unique = true, nullable = false)

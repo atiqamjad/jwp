@@ -3,6 +3,8 @@
  */
 package com.samsonych.service;
 
+import java.io.File;
+
 import is.ida.lib.service.exception.ServiceException;
 
 import org.apache.log4j.Logger;
@@ -20,43 +22,46 @@ import com.samsonych.service.dba.DBManagerFactory;
  */
 public class WPManager {
 
-    Logger logger = Logger.getLogger(getClass());
-    private static BaseDBManagerImpl postManager;
-    private static BaseDBManagerImpl userManager;
+	private static Logger LOG = Logger.getLogger(WPManager.class);
 
-    public WPManager() {
-        postManager = DBManagerFactory.getBaseDBManager(Post.class);
-        userManager = DBManagerFactory.getBaseDBManager(User.class);
-    }
+	private static BaseDBManagerImpl postManager;
+	private static BaseDBManagerImpl userManager;
 
-    public Post saveOrUpdatePost(Post post) throws ServiceException {
-        return (Post) postManager.saveOrUpdate(post);
-    }
+	public WPManager() {
+		postManager = DBManagerFactory.getBaseDBManager(Post.class);
+		userManager = DBManagerFactory.getBaseDBManager(User.class);
+	}
 
-    public static void main(String... args) {
-        DBManagerFactory.setApplicationContext(new ClassPathXmlApplicationContext(
-                "classpath:applicationContext.xml"));
-        WPManager manager = new WPManager();
-        try {
-            // добавление поста
-            Post p = Post.createDefaultPost();
+	public Post saveOrUpdatePost(Post post) throws ServiceException {
+		return (Post) postManager.saveOrUpdate(post);
+	}
 
-            User author = (User) userManager.getById(1L);
-            p.setPostAuthor(author);
-            p.setGuid("guid1");
-            p.setPinged("");
-            p.setPostContentFiltered("");
-            p.setPostExcerpt("test PostExcerpt");
-            p.setPostName("test PostName");
-            p.setPostTitle("test PostTitle");
-            p.setPostMimeType("");
-            p.setPostContent("<h2>test</h2> - 'PostContent'");
-            p.setPostType(PostType.post);
+	public static void main(String... args) {
+		DBManagerFactory
+				.setApplicationContext(new ClassPathXmlApplicationContext(
+						"classpath:applicationContext.xml"));
+		WPManager manager = new WPManager();
+		try {
+			// добавление поста
+			Post p = Post.createDefaultPost();
 
-            manager.saveOrUpdatePost(p);
-        } catch (ServiceException ex) {
-            // TODO Auto-generated catch block
-            ex.printStackTrace();
-        }
-    }
+			User author = (User) userManager.getById(1L);
+			p.setPostAuthor(author);
+			p.setGuid("guid1");
+			p.setPinged("");
+			p.setPostContentFiltered("");
+			p.setPostExcerpt("test PostExcerpt");
+			p.setPostName("test PostName");
+			p.setPostTitle("test PostTitle");
+			p.setPostMimeType("");
+			p.setPostContent("<h2>test</h2> - 'PostContent'");
+			p.setPostType(PostType.post);
+
+			manager.saveOrUpdatePost(p);
+		} catch (ServiceException ex) {
+			// TODO Auto-generated catch block
+			ex.printStackTrace();
+		}
+	}
+
 }

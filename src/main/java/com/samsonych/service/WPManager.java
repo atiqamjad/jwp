@@ -1,13 +1,12 @@
 /**
- * 
+ *
  */
 package com.samsonych.service;
 
-import org.apache.log4j.Logger;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 import is.ida.lib.service.exception.ServiceException;
+
+import org.apache.log4j.Logger;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.samsonych.model.wp.Post;
 import com.samsonych.model.wp.PostType;
@@ -17,7 +16,7 @@ import com.samsonych.service.dba.DBManagerFactory;
 
 /**
  * @author samsonych
- * 
+ *
  */
 public class WPManager {
 
@@ -34,7 +33,7 @@ public class WPManager {
         return (Post) postManager.saveOrUpdate(post);
     }
 
-    public static void main(String... arg) {
+    public static void main(String... args) {
         DBManagerFactory.setApplicationContext(new ClassPathXmlApplicationContext(
                 "classpath:applicationContext.xml"));
         WPManager manager = new WPManager();

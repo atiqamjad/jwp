@@ -7,6 +7,6 @@ package com.samsonych.model.wp;
  * @author samsonov
  *
  */
-public enum PostType {
-	page, post, revision, attachment;
+public enum CommentStatus {
+	open, closed, registered_only;
 }

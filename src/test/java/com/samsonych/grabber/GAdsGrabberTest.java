@@ -2,22 +2,25 @@ package com.samsonych.grabber;
 
 import java.io.File;
 import java.net.URISyntaxException;
+import java.net.URL;
 
 import junit.framework.Assert;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class GAdsGrabberTest {
 
-    private static final String EXPECTED_TITLE = "Negotiating Rates with Your Credit Card Company";
+    private static final String TEST_FILE = "/7777.php";
+
+	private static final String EXPECTED_TITLE = "Negotiating Rates with Your Credit Card Company";
 
     private static GAdsGrabber grabber;
 
     @Before
     public void init() throws URISyntaxException {
-        grabber = new GAdsGrabber(new File(getClass().getResource("/7777.php").toURI()));
+        URL resource = getClass().getResource(TEST_FILE);
+		grabber = new GAdsGrabber(new File(resource.toURI()));
     }
 
     @Test

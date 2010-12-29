@@ -11,7 +11,7 @@
 		<mapping class="com.samsonych.model.wp.Post" />
 		<mapping class="com.samsonych.model.wp.PostMeta" />
 		<mapping class="com.samsonych.model.wp.Term" />
-		<mapping class="com.samsonych.model.wp.TermTaxonomy" />
+		<mapping class="com.samsonych.model.wp.Taxonomy" />
 		<mapping class="com.samsonych.model.wp.User" />
 		<mapping class="com.samsonych.model.wp.UserMeta" />
 	</session-factory>

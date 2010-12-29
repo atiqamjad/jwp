@@ -3,62 +3,69 @@
  */
 package com.samsonych.service;
 
-import java.io.File;
-import java.util.Map;
+import is.ida.lib.service.exception.ServiceException;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.lang.WordUtils;
 import org.apache.log4j.Logger;
 
+import com.samsonych.grabber.GAdsGrabber;
 import com.samsonych.model.wp.Post;
-import com.samsonych.model.wp.TaxonomyType;
-import com.samsonych.model.wp.Term;
-import com.samsonych.model.wp.TermTaxonomy;
+import com.samsonych.model.wp.Taxonomy;
 
 /**
  * @author samsonov
- *
+ * 
  */
 public class Poster {
 
-	private static Logger LOG = Logger.getLogger(Poster.class);
-	private static WPManager manager = new WPManager();
+    private static Logger LOG = Logger.getLogger(Poster.class);
+    private static WPManager manager = new WPManager();
 
-	private String niche;
+    private String niche;
 
-	private Map<Integer, TermTaxonomy> termTaxonomies;
+    private final List<Taxonomy> taxonomies = new ArrayList<Taxonomy>();
 
-	public Poster(String niche) {
-		this.niche = niche;
-		termTaxonomies.put(1, createNicheCategory(niche));
-	}
+    public Poster(final String niche) {
+        this.niche = niche;
+        try {
+            taxonomies.add(addNicheCategory());
+        } catch (ServiceException ex) {
+            LOG.error("addNicheCategory problem", ex);
+        }
+        // taxonomies.addAll(addNicheTags());
+    }
 
-	public String getNiche() {
-		return niche;
-	}
+    public String getNiche() {
+        return niche;
+    }
 
-	public void setNiche(String niche) {
-		this.niche = niche;
-	}
+    public void setNiche(final String niche) {
+        this.niche = niche;
+    }
 
-	public void doPostFromFile(File file) {
-		Post post = new Post();
-		// create category
-//		post.setTermTaxonomies(termTaxonomies);
-		// create tags
-		// create post
-		LOG.trace(String.format("Processing niche file [%s/%s] ...", niche,
-				file.getName()));
-	}
+    public Post getPostFromFile(final File file) {
+        GAdsGrabber grabber = new GAdsGrabber(file);
 
-	public TermTaxonomy createNicheCategory(String niche) {
-		Term term = new Term(niche, niche);
-		TermTaxonomy taxonomy = new TermTaxonomy(term, TaxonomyType.category);
-		return taxonomy;
-	}
+        Post post = Post.createDefaultPost();
+        post.setPostTitle(grabber.getPostTitle());
+        post.setPostContent(grabber.getPostContent());
+        post.setTaxonomies(taxonomies);
+        LOG.trace(String.format("Processing niche file [%s/%s] ...", niche, file.getName()));
+        return post;
+    }
 
-	public TermTaxonomy createNicheTags(String niche) {
-		Term term = new Term(niche, niche);
-		TermTaxonomy taxonomy = new TermTaxonomy(term, TaxonomyType.post_tag);
-		return taxonomy;
-	}
+    public Taxonomy addNicheCategory() throws ServiceException {
+        String category = niche;
+        String slug = WordUtils.capitalizeFully(niche);
+        String desc = niche;
+        return manager.saveOrUpdateTaxonomy(Taxonomy.createCategory(category, slug, desc));
+    }
 
+    public List<Taxonomy> addNicheTags() {
+        return null;
+    }
 }

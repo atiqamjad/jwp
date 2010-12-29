@@ -16,7 +16,6 @@ import java.nio.charset.Charset;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 /**
@@ -69,9 +68,9 @@ public class GAdsGrabber {
         String endStr = "<?php include(\"inc/ads-body.inc\"); ?>";
         int startIndex = string.indexOf(startStr) + startStr.length();
         int endIndex = string.indexOf(endStr);
-        //with delete CR's
+        // with delete CR's
         String result = string.substring(startIndex, endIndex).replaceAll("\r|\n", "");
-        LOG.trace(String.format("post content [%s]", result));
+        LOG.trace(String.format("Post content [%s]", result));
         LOG.debug("post content size = " + result.length());
         return result;
     }
@@ -79,8 +78,14 @@ public class GAdsGrabber {
     public String getPostTitle() {
         String regexp = "^<h1\\>(.*)<\\/h1>$";
         String result = findMatchFromCharBuffer(regexp);
-        LOG.debug(String.format("title post = '%s'", result));
+        LOG.debug(String.format("Title post = '%s'", result));
         return result;
     }
 
+    public String clearTrash(String str){
+        //delete '<p></p>'
+        // - <br />
+        // <a href="">
+        return str;
+    }
 }

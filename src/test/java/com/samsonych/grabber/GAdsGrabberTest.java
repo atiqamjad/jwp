@@ -1,27 +1,15 @@
 package com.samsonych.grabber;
 
-import java.io.File;
-import java.net.URISyntaxException;
-import java.net.URL;
-
 import junit.framework.Assert;
 
-import org.junit.Before;
 import org.junit.Test;
 
-public class GAdsGrabberTest {
+import com.samsonych.service.AppJUnit4SpringContextTests;
 
-    private static final String TEST_FILE = "/7777.php";
+public class GAdsGrabberTest extends AppJUnit4SpringContextTests{
 
 	private static final String EXPECTED_TITLE = "Negotiating Rates with Your Credit Card Company";
 
-    private static GAdsGrabber grabber;
-
-    @Before
-    public void init() throws URISyntaxException {
-        URL resource = getClass().getResource(TEST_FILE);
-		grabber = new GAdsGrabber(new File(resource.toURI()));
-    }
 
     @Test
     public final void testGetPostTitle() {

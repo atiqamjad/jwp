@@ -9,28 +9,37 @@ package com.samsonych.service;
 
 import is.ida.lib.service.exception.ServiceException;
 
+import java.io.File;
+import java.net.URISyntaxException;
+
 import org.junit.Before;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
+import com.samsonych.grabber.GAdsGrabber;
 import com.samsonych.service.dba.BaseDBManagerImpl;
 import com.samsonych.service.dba.DBManagerFactory;
 
 /**
  * @author S.Samsonov
- * @version $Id: ACPSJUnit4SpringContextTests.java 1014 2010-10-23 11:52:30Z
- *          homyakov $
+ * @version $Id: ACPSJUnit4SpringContextTests.java 1014 2010-10-23 11:52:30Z homyakov $
  */
-@ContextConfiguration(locations = { "classpath:applicationContext-test.xml" })
-public class AppJUnit4SpringContextTests extends
-		AbstractJUnit4SpringContextTests {
+@ContextConfiguration(locations = { "classpath:applicationContext.xml" })
+public class AppJUnit4SpringContextTests extends AbstractJUnit4SpringContextTests {
 
-	protected static BaseDBManagerImpl baseDBManager;
+    protected static final String TEST_FILE = "/7777.php";
+    protected static BaseDBManagerImpl baseDBManager;
+    protected static GAdsGrabber grabber;
+    protected static File testFile;
 
-	@Before
-	public void initialize() throws ServiceException {
-		DBManagerFactory.setApplicationContext(applicationContext);
-		baseDBManager = DBManagerFactory.getBaseDBManager();
-	}
+    @Before
+    public void initialize() throws ServiceException, URISyntaxException {
+        DBManagerFactory.setApplicationContext(applicationContext);
+        if (baseDBManager == null) {
+            baseDBManager = DBManagerFactory.getBaseDBManager();
+            testFile = new File(getClass().getResource(TEST_FILE).toURI());
+            grabber = new GAdsGrabber(testFile);
+        }
+    }
 
 }

@@ -31,321 +31,335 @@ import javax.persistence.Transient;
 @Table(name = "wp_posts")
 public class Post implements java.io.Serializable {
 
-	private static final long serialVersionUID = -3853310933943629341L;
+    private static final long serialVersionUID = -3853310933943629341L;
 
-	public static Post createDefaultPost() {
-		Post post = new Post();
-		post.setCommentStatus(CommentStatus.open);
-		post.setPingStatus(PingStatus.open);
-		post.setPostStatusEnum(PostStatus.PUBLISH);
-		post.setPostPassword("");
-		post.setToPing("");
-		post.setPostDate(new Date());
-		post.setPostDateGmt(new Date());
-		post.setPostModified(new Date());
-		post.setPostModifiedGmt(new Date());
-		return post;
-	}
+    public static Post createDefaultPost() {
+        Post post = new Post();
+        post.setCommentStatus(CommentStatus.open);
+        post.setPingStatus(PingStatus.open);
+        post.setPostStatusEnum(PostStatus.PUBLISH);
+        post.setPostType(PostType.post);
+        post.setPostPassword("");
+        post.setToPing("");
+        post.setPinged("");
+        post.setGuid("");
+        post.setPostDate(new Date());
+        post.setPostDateGmt(new Date());
+        post.setPostModified(new Date());
+        post.setPostModifiedGmt(new Date());
+        post.setPostContentFiltered("");
+        post.setPostExcerpt("");
+        post.setPostMimeType("");
+        return post;
+    }
 
-	private long commentCount;
-	private List<Comment> comments;
-	private CommentStatus commentStatus;
-	private String guid;
-	private Long id;
-	private int menuOrder;
-	private String pinged;
-	private PingStatus pingStatus;
-	private User postAuthor;
-	private String postContent;
-	private String postContentFiltered;
-	private Date postDate;
-	private Date postDateGmt;
-	private String postExcerpt;
-	private List<PostMeta> postMetaItems;
-	private String postMimeType;
-	private Date postModified;
-	private Date postModifiedGmt;
-	private String postName;
-	private long postParent;
+    private long commentCount;
+    private List<Comment> comments;
+    private CommentStatus commentStatus;
+    private String guid;
+    private Long id;
+    private int menuOrder;
+    private String pinged;
+    private PingStatus pingStatus;
+    private User postAuthor;
+    private String postContent;
+    private String postContentFiltered;
+    private Date postDate;
+    private Date postDateGmt;
+    private String postExcerpt;
+    private List<PostMeta> postMetaItems;
+    private String postMimeType;
+    private Date postModified;
+    private Date postModifiedGmt;
+    private String postName;
+    private long postParent;
 
-	private String postPassword;
+    private String postPassword;
 
-	private String postStatus;
+    private String postStatus;
 
-	private String postTitle;
+    private String postTitle;
 
-	private PostType postType;
-	// private Map<Integer, TermTaxonomy> termTaxonomies;
-	private List<TermTaxonomy> termTaxonomies;
-	private String toPing;
+    private PostType postType;
+    private String toPing;
 
-	public Post() {
-	}
+    private List<Taxonomy> taxonomies;
 
-	@Column(name = "comment_count")
-	public long getCommentCount() {
-		return this.commentCount;
-	}
+    public Post() {
+    }
 
-	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	public List<Comment> getComments() {
-		return comments;
-	}
+    @Column(name = "comment_count")
+    public long getCommentCount() {
+        return this.commentCount;
+    }
 
-	@Enumerated(EnumType.STRING)
-	@Column(name = "comment_status", nullable = false, length = 20)
-	public CommentStatus getCommentStatus() {
-		return this.commentStatus;
-	}
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    public List<Comment> getComments() {
+        return comments;
+    }
 
-	@Column(name = "guid", nullable = false)
-	public String getGuid() {
-		return this.guid;
-	}
+    @Enumerated(EnumType.STRING)
+    @Column(name = "comment_status", nullable = false, length = 20)
+    public CommentStatus getCommentStatus() {
+        return this.commentStatus;
+    }
 
-	@Id
-	@GeneratedValue
-	// @GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "ID")
-	public Long getId() {
-		return this.id;
-	}
+    @Column(name = "guid", nullable = false)
+    public String getGuid() {
+        return this.guid;
+    }
 
-	@Column(name = "menu_order")
-	public int getMenuOrder() {
-		return this.menuOrder;
-	}
+    @Id
+    @GeneratedValue
+    // @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID")
+    public Long getId() {
+        return this.id;
+    }
 
-	// @Column(name = "pinged", nullable = false, length = 65535)
-	@Lob
-	@Column(name = "pinged", nullable = false)
-	public String getPinged() {
-		return this.pinged;
-	}
+    @Column(name = "menu_order")
+    public int getMenuOrder() {
+        return this.menuOrder;
+    }
 
-	@Enumerated(EnumType.STRING)
-	@Column(name = "ping_status", nullable = false, length = 20)
-	public PingStatus getPingStatus() {
-		return this.pingStatus;
-	}
+    // @Column(name = "pinged", nullable = false, length = 65535)
+    @Lob
+    @Column(name = "pinged", nullable = false)
+    public String getPinged() {
+        return this.pinged;
+    }
 
-	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
-	@JoinColumn(name = "post_author", nullable = false)
-	public User getPostAuthor() {
-		return this.postAuthor;
-	}
+    @Enumerated(EnumType.STRING)
+    @Column(name = "ping_status", nullable = false, length = 20)
+    public PingStatus getPingStatus() {
+        return this.pingStatus;
+    }
 
-	@Lob
-	@Column(name = "post_content", nullable = false)
-	public String getPostContent() {
-		return this.postContent;
-	}
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+    @JoinColumn(name = "post_author", nullable = false)
+    public User getPostAuthor() {
+        return this.postAuthor;
+    }
 
-	@Lob
-	@Column(name = "post_content_filtered")
-	public String getPostContentFiltered() {
-		return this.postContentFiltered;
-	}
+    @Lob
+    @Column(name = "post_content", nullable = false)
+    public String getPostContent() {
+        return this.postContent;
+    }
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "post_date", nullable = false)
-	public Date getPostDate() {
-		return this.postDate;
-	}
+    @Lob
+    @Column(name = "post_content_filtered")
+    public String getPostContentFiltered() {
+        return this.postContentFiltered;
+    }
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "post_date_gmt", nullable = false)
-	public Date getPostDateGmt() {
-		return this.postDateGmt;
-	}
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "post_date", nullable = false)
+    public Date getPostDate() {
+        return this.postDate;
+    }
 
-	@Lob
-	@Column(name = "post_excerpt")
-	public String getPostExcerpt() {
-		return this.postExcerpt;
-	}
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "post_date_gmt", nullable = false)
+    public Date getPostDateGmt() {
+        return this.postDateGmt;
+    }
 
-	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	public List<PostMeta> getPostMetaItems() {
-		return postMetaItems;
-	}
+    @Lob
+    @Column(name = "post_excerpt")
+    public String getPostExcerpt() {
+        return this.postExcerpt;
+    }
 
-	@Column(name = "post_mime_type", length = 100)
-	public String getPostMimeType() {
-		return this.postMimeType;
-	}
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    public List<PostMeta> getPostMetaItems() {
+        return postMetaItems;
+    }
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "post_modified")
-	public Date getPostModified() {
-		return this.postModified;
-	}
+    @Column(name = "post_mime_type", length = 100)
+    public String getPostMimeType() {
+        return this.postMimeType;
+    }
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "post_modified_gmt")
-	public Date getPostModifiedGmt() {
-		return this.postModifiedGmt;
-	}
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "post_modified")
+    public Date getPostModified() {
+        return this.postModified;
+    }
 
-	@Column(name = "post_name", nullable = false, length = 200)
-	public String getPostName() {
-		return this.postName;
-	}
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "post_modified_gmt")
+    public Date getPostModifiedGmt() {
+        return this.postModifiedGmt;
+    }
 
-	@Column(name = "post_parent")
-	public long getPostParent() {
-		return this.postParent;
-	}
+    @Column(name = "post_name", nullable = false, length = 200)
+    public String getPostName() {
+        return this.postName;
+    }
 
-	@Column(name = "post_password", nullable = false, length = 20)
-	public String getPostPassword() {
-		return this.postPassword;
-	}
+    @Column(name = "post_parent")
+    public long getPostParent() {
+        return this.postParent;
+    }
 
-	@Column(name = "post_status", nullable = false, length = 20)
-	public String getPostStatus() {
-		return this.postStatus;
-	}
+    @Column(name = "post_password", nullable = false, length = 20)
+    public String getPostPassword() {
+        return this.postPassword;
+    }
 
-	@Transient
-	public PostStatus getPostStatusEnum() {
-		return PostStatus.valueOf(this.postStatus);
-	}
+    @Column(name = "post_status", nullable = false, length = 20)
+    public String getPostStatus() {
+        return this.postStatus;
+    }
 
-	@Lob
-	@Column(name = "post_title", nullable = false)
-	// @Column(name = "post_title", nullable = false, length = 65535)
-	public String getPostTitle() {
-		return this.postTitle;
-	}
+    @Transient
+    public PostStatus getPostStatusEnum() {
+        return PostStatus.valueOf(this.postStatus);
+    }
 
-	@Enumerated(EnumType.STRING)
-	@Column(name = "post_type", nullable = false, length = 20)
-	public PostType getPostType() {
-		return this.postType;
-	}
+    @Lob
+    @Column(name = "post_title", nullable = false)
+    // @Column(name = "post_title", nullable = false, length = 65535)
+    public String getPostTitle() {
+        return this.postTitle;
+    }
 
-	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-	@JoinTable(name = "wp_term_relationships", joinColumns = @JoinColumn(name = "object_id", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "term_taxonomy_id", referencedColumnName = "term_taxonomy_id"))
-	// @MapKeyColumn(name = "term_order")
-	@OrderColumn(name = "term_order", insertable = true, nullable = false)
-	public List<TermTaxonomy> getTermTaxonomies() {
-		return termTaxonomies;
-	}
+    @Enumerated(EnumType.STRING)
+    @Column(name = "post_type", nullable = false, length = 20)
+    public PostType getPostType() {
+        return this.postType;
+    }
 
-	// @Column(name = "to_ping", nullable = false, length = 65535)
-	@Column(name = "to_ping")
-	public String getToPing() {
-		return this.toPing;
-	}
+    @OneToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.LAZY)
+    @JoinTable(name = "wp_term_relationships", joinColumns = @JoinColumn(name = "object_id", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "term_taxonomy_id", referencedColumnName = "term_taxonomy_id"))
+    // @MapKeyColumn(name = "term_order")
+    @OrderColumn(name = "term_order", insertable = true, nullable = false)
+    public List<Taxonomy> getTaxonomies() {
+        return taxonomies;
+    }
 
-	public void setCommentCount(long commentCount) {
-		this.commentCount = commentCount;
-	}
+    // @Column(name = "to_ping", nullable = false, length = 65535)
+    @Column(name = "to_ping")
+    public String getToPing() {
+        return this.toPing;
+    }
 
-	public void setComments(List<Comment> comments) {
-		this.comments = comments;
-	}
+    public void setCommentCount(final long commentCount) {
+        this.commentCount = commentCount;
+    }
 
-	public void setCommentStatus(CommentStatus commentStatus) {
-		this.commentStatus = commentStatus;
-	}
+    public void setComments(final List<Comment> comments) {
+        this.comments = comments;
+    }
 
-	public void setGuid(String guid) {
-		this.guid = guid;
-	}
+    public void setCommentStatus(final CommentStatus commentStatus) {
+        this.commentStatus = commentStatus;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setGuid(final String guid) {
+        this.guid = guid;
+    }
 
-	public void setMenuOrder(int menuOrder) {
-		this.menuOrder = menuOrder;
-	}
+    public void setId(final Long id) {
+        this.id = id;
+    }
 
-	public void setPinged(String pinged) {
-		this.pinged = pinged;
-	}
+    public void setMenuOrder(final int menuOrder) {
+        this.menuOrder = menuOrder;
+    }
 
-	public void setPingStatus(PingStatus pingStatus) {
-		this.pingStatus = pingStatus;
-	}
+    public void setPinged(final String pinged) {
+        this.pinged = pinged;
+    }
 
-	public void setPostAuthor(User postAuthor) {
-		this.postAuthor = postAuthor;
-	}
+    public void setPingStatus(final PingStatus pingStatus) {
+        this.pingStatus = pingStatus;
+    }
 
-	public void setPostContent(String postContent) {
-		this.postContent = postContent;
-	}
+    public void setPostAuthor(final User postAuthor) {
+        this.postAuthor = postAuthor;
+    }
 
-	public void setPostContentFiltered(String postContentFiltered) {
-		this.postContentFiltered = postContentFiltered;
-	}
+    public void setPostContent(final String postContent) {
+        this.postContent = postContent;
+    }
 
-	public void setPostDate(Date postDate) {
-		this.postDate = postDate;
-	}
+    public void setPostContentFiltered(final String postContentFiltered) {
+        this.postContentFiltered = postContentFiltered;
+    }
 
-	public void setPostDateGmt(Date postDateGmt) {
-		this.postDateGmt = postDateGmt;
-	}
+    public void setPostDate(final Date postDate) {
+        this.postDate = postDate;
+    }
 
-	public void setPostExcerpt(String postExcerpt) {
-		this.postExcerpt = postExcerpt;
-	}
+    public void setPostDateGmt(final Date postDateGmt) {
+        this.postDateGmt = postDateGmt;
+    }
 
-	public void setPostMetaItems(List<PostMeta> postMetaItems) {
-		this.postMetaItems = postMetaItems;
-	}
+    public void setPostExcerpt(final String postExcerpt) {
+        this.postExcerpt = postExcerpt;
+    }
 
-	public void setPostMimeType(String postMimeType) {
-		this.postMimeType = postMimeType;
-	}
+    public void setPostMetaItems(final List<PostMeta> postMetaItems) {
+        this.postMetaItems = postMetaItems;
+    }
 
-	public void setPostModified(Date postModified) {
-		this.postModified = postModified;
-	}
+    public void setPostMimeType(final String postMimeType) {
+        this.postMimeType = postMimeType;
+    }
 
-	public void setPostModifiedGmt(Date postModifiedGmt) {
-		this.postModifiedGmt = postModifiedGmt;
-	}
+    public void setPostModified(final Date postModified) {
+        this.postModified = postModified;
+    }
 
-	public void setPostName(String postName) {
-		this.postName = postName;
-	}
+    public void setPostModifiedGmt(final Date postModifiedGmt) {
+        this.postModifiedGmt = postModifiedGmt;
+    }
 
-	public void setPostParent(long postParent) {
-		this.postParent = postParent;
-	}
+    public void setPostName(final String postName) {
+        this.postName = postName;
+    }
 
-	public void setPostPassword(String postPassword) {
-		this.postPassword = postPassword;
-	}
+    public void setPostParent(final long postParent) {
+        this.postParent = postParent;
+    }
 
-	public void setPostStatus(String postStatus) {
-		this.postStatus = postStatus;
-	}
+    public void setPostPassword(final String postPassword) {
+        this.postPassword = postPassword;
+    }
 
-	@Transient
-	public void setPostStatusEnum(PostStatus postStatus) {
-		this.postStatus = postStatus.getStatus();
-	}
+    public void setPostStatus(final String postStatus) {
+        this.postStatus = postStatus;
+    }
 
-	public void setPostTitle(String postTitle) {
-		this.postTitle = postTitle;
-	}
+    @Transient
+    public void setPostStatusEnum(final PostStatus postStatus) {
+        this.postStatus = postStatus.getStatus();
+    }
 
-	public void setPostType(PostType postType) {
-		this.postType = postType;
-	}
+    public void setPostTitle(final String postTitle) {
+        this.postTitle = postTitle;
+    }
 
-	public void setTermTaxonomies(List<TermTaxonomy> termTaxonomies) {
-		this.termTaxonomies = termTaxonomies;
-	}
+    public void setPostType(final PostType postType) {
+        this.postType = postType;
+    }
 
-	public void setToPing(String toPing) {
-		this.toPing = toPing;
-	}
+    public void setTaxonomies(final List<Taxonomy> taxonomies) {
+        this.taxonomies = taxonomies;
+    }
+
+    public void setToPing(final String toPing) {
+        this.toPing = toPing;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Post [id=").append(id).append(", postName=").append(postName)
+                .append(", postTitle=").append(postTitle).append("]");
+        return builder.toString();
+    }
 
 }

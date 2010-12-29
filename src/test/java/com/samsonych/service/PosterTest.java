@@ -6,6 +6,7 @@ import junit.framework.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import com.samsonych.AppJUnit4SpringContextTests;
 import com.samsonych.model.wp.Post;
 import com.samsonych.model.wp.Taxonomy;
 import com.samsonych.model.wp.User;

@@ -4,7 +4,7 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
-import com.samsonych.service.AppJUnit4SpringContextTests;
+import com.samsonych.AppJUnit4SpringContextTests;
 
 public class GAdsGrabberTest extends AppJUnit4SpringContextTests{
 

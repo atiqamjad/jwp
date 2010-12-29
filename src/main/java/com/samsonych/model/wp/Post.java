@@ -354,12 +354,11 @@ public class Post implements java.io.Serializable {
         this.toPing = toPing;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Post [id=").append(id).append(", postName=").append(postName)
-                .append(", postTitle=").append(postTitle).append("]");
-        return builder.toString();
-    }
+	@Override
+	public String toString() {
+		return String.format("Post [id=%s, postName='%s', postTitle='%s']", id,
+				postName, postTitle);
+	}
+
 
 }

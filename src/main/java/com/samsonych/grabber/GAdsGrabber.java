@@ -20,9 +20,9 @@ import org.apache.log4j.Logger;
 
 /**
  * @author samsonov
- * 
+ *
  */
-public class GAdsGrabber {
+public class GAdsGrabber implements IWPGrabber{
 
     private static Logger LOG = Logger.getLogger(GAdsGrabber.class);
 
@@ -88,4 +88,24 @@ public class GAdsGrabber {
         // <a href="">
         return str;
     }
+
+	public String getPostName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getMetaKeywords() {
+        String regexp = "^<meta name=\"Keywords\" content=\"(.*)\">$";
+        String result = findMatchFromCharBuffer(regexp);
+        LOG.debug(String.format("Meta keywords post = '%s'", result));
+        return result;
+	}
+
+	public String getMetaDescription() {
+        String regexp = "^<meta name=\"Description\" content=\"(.*)\">$";
+        String result = findMatchFromCharBuffer(regexp);
+        LOG.debug(String.format("Meta description post = '%s'", result));
+        return result;
+	}
+
 }

@@ -231,7 +231,7 @@ public class Post implements java.io.Serializable {
         return this.postType;
     }
 
-    @OneToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.LAZY)
+    @OneToMany(cascade = { CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE }, fetch = FetchType.LAZY)
     @JoinTable(name = "wp_term_relationships", joinColumns = @JoinColumn(name = "object_id", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "term_taxonomy_id", referencedColumnName = "term_taxonomy_id"))
     // @MapKeyColumn(name = "term_order")
     @OrderColumn(name = "term_order", insertable = true, nullable = false)
@@ -354,11 +354,10 @@ public class Post implements java.io.Serializable {
         this.toPing = toPing;
     }
 
-	@Override
-	public String toString() {
-		return String.format("Post [id=%s, postName='%s', postTitle='%s']", id,
-				postName, postTitle);
-	}
-
+    @Override
+    public String toString() {
+        return String
+                .format("Post [id=%s, postName='%s', postTitle='%s']", id, postName, postTitle);
+    }
 
 }

@@ -44,17 +44,7 @@ public class PosterTest extends AppJUnit4SpringContextTests {
     @Test
     @Ignore
     public final void testCreateNicheTags() throws ServiceException {
-        Poster poster = new Poster("debt-relief");
-        String category = poster.getNiche();
-        baseDBManager.saveOrUpdateAll(poster.addNicheTags());
-
-        Taxonomy taxonomy2 = (Taxonomy) baseDBManager.executeHQLQuery(
-                String.format("from TermTaxonomy where term.name='%s'", category));
-        Assert.assertNotNull(taxonomy2);
-        Assert.assertEquals(taxonomy2.getTerm().getName(), "debt-consolidation");
-        Assert.assertEquals(taxonomy2.getTerm().getSlug(), "Debt-Consolidation");
-        
-        baseDBManager.deleteById(taxonomy2);
+        Poster poster = new Poster("debt-relief-consolidation");
     }
 
 }

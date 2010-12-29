@@ -20,15 +20,15 @@ import org.apache.log4j.Logger;
 
 /**
  * @author samsonov
- *
+ * 
  */
-public class GAdsGrabber implements IWPGrabber{
+public class GAdsGrabber implements IWPGrabber {
 
     private static Logger LOG = Logger.getLogger(GAdsGrabber.class);
 
     private CharBuffer charBuffer;
 
-    public GAdsGrabber(File file) {
+    public GAdsGrabber(final File file) {
         LOG.debug(String.format("Grabing file - %s ", file.getAbsolutePath()));
         try {
             charBuffer = getBuffer(new FileInputStream(file));
@@ -37,7 +37,7 @@ public class GAdsGrabber implements IWPGrabber{
         }
     }
 
-    private String findMatchFromCharBuffer(String regexp) {
+    private String findMatchFromCharBuffer(final String regexp) {
         Pattern p = Pattern.compile(regexp, Pattern.MULTILINE);
         // Run some matches
         Matcher m = p.matcher(charBuffer);
@@ -48,7 +48,7 @@ public class GAdsGrabber implements IWPGrabber{
         return result;
     }
 
-    private CharBuffer getBuffer(InputStream is) {
+    private CharBuffer getBuffer(final InputStream is) {
         try {
             FileChannel fc = ((FileInputStream) is).getChannel();
             // Get a CharBuffer from the source file
@@ -82,30 +82,29 @@ public class GAdsGrabber implements IWPGrabber{
         return result;
     }
 
-    public String clearTrash(String str){
-        //delete '<p></p>'
+    public String clearTrash(final String str) {
+        // delete '<p></p>'
         // - <br />
         // <a href="">
         return str;
     }
 
-	public String getPostName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public String getPostName() {
+        return getPostTitle().replaceAll("[ |_|:|,]", "-").toLowerCase();
+    }
 
-	public String getMetaKeywords() {
+    public String getMetaKeywords() {
         String regexp = "^<meta name=\"Keywords\" content=\"(.*)\">$";
         String result = findMatchFromCharBuffer(regexp);
         LOG.debug(String.format("Meta keywords post = '%s'", result));
         return result;
-	}
+    }
 
-	public String getMetaDescription() {
+    public String getMetaDescription() {
         String regexp = "^<meta name=\"Description\" content=\"(.*)\">$";
         String result = findMatchFromCharBuffer(regexp);
         LOG.debug(String.format("Meta description post = '%s'", result));
         return result;
-	}
+    }
 
 }

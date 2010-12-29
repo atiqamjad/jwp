@@ -7,6 +7,7 @@ import is.ida.lib.service.exception.ServiceException;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.lang.WordUtils;
@@ -15,6 +16,7 @@ import org.apache.log4j.Logger;
 import com.samsonych.grabber.GAdsGrabber;
 import com.samsonych.model.wp.Post;
 import com.samsonych.model.wp.Taxonomy;
+import com.samsonych.model.wp.User;
 
 /**
  * @author samsonov
@@ -23,7 +25,7 @@ import com.samsonych.model.wp.Taxonomy;
 public class Poster {
 
     private static Logger LOG = Logger.getLogger(Poster.class);
-    private static WPManager manager = new WPManager();
+    private static WPManager wpManager = new WPManager();
 
     private String niche;
 
@@ -31,12 +33,6 @@ public class Poster {
 
     public Poster(final String niche) {
         this.niche = niche;
-        try {
-            taxonomies.add(addNicheCategory());
-        } catch (ServiceException ex) {
-            LOG.error("addNicheCategory problem", ex);
-        }
-        // taxonomies.addAll(addNicheTags());
     }
 
     public String getNiche() {
@@ -51,21 +47,39 @@ public class Poster {
         GAdsGrabber grabber = new GAdsGrabber(file);
 
         Post post = Post.createDefaultPost();
+        post.setPostAuthor(getAuthor());
         post.setPostTitle(grabber.getPostTitle());
+        post.setPostName(grabber.getPostName());
         post.setPostContent(grabber.getPostContent());
+        taxonomies.addAll(addNicheTags(grabber.getMetaKeywords()));
         post.setTaxonomies(taxonomies);
         LOG.trace(String.format("Processing niche file [%s/%s] ...", niche, file.getName()));
         return post;
     }
 
-    public Taxonomy addNicheCategory() throws ServiceException {
-        String category = niche;
-        String slug = WordUtils.capitalizeFully(niche);
-        String desc = niche;
-        return manager.saveOrUpdateTaxonomy(Taxonomy.createCategory(category, slug, desc));
+    private User getAuthor() {
+        // TODO get random user
+        User author = null;
+        try {
+            author = wpManager.getUserById(1L);
+        } catch (ServiceException ex) {
+            LOG.error("getUserById error", ex);
+        }
+        return author;
     }
 
-    public List<Taxonomy> addNicheTags() {
-        return null;
+    public Taxonomy addNicheCategory() {
+        Taxonomy category = Taxonomy.createCategory(niche, WordUtils.capitalizeFully(niche), niche);
+        try {
+            category = wpManager.saveOrUpdateTaxonomy(category);
+        } catch (ServiceException ex) {
+            LOG.error("addNicheCategory error", ex);
+        }
+        return category;
+    }
+
+    List<Taxonomy> addNicheTags(final String keywords) {
+        List<Taxonomy> tags = Collections.EMPTY_LIST;
+        return tags;
     }
 }

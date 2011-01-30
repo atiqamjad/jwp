@@ -16,8 +16,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import org.apache.commons.lang.StringUtils;
-
 /**
  * This table describes the taxonomy (category, link, or tag).
  */
@@ -108,7 +106,7 @@ public class Taxonomy implements java.io.Serializable {
 
     public static Taxonomy createCategory(final String category, final String slug,
             final String desc) {
-        Term term = new Term(category, StringUtils.capitalize(category));
+        Term term = new Term(category, slug);
         Taxonomy taxonomy = new Taxonomy(term, TaxonomyType.category);
         taxonomy.setDescription(desc);
         return taxonomy;

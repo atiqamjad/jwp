@@ -5,6 +5,8 @@ package com.samsonych.service;
 
 import is.ida.lib.service.exception.ServiceException;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 
 import com.samsonych.model.wp.Post;
@@ -41,6 +43,11 @@ public class WPManager {
 
     public User getUserById(final Long id) throws ServiceException {
         return (User) userManager.getById(id);
+    }
+
+    public List<Taxonomy> saveOrUpdateTaxonomyAll(final List<Taxonomy> taxonomies)
+            throws ServiceException {
+        return taxonomyManager.saveOrUpdateAll(taxonomies);
     }
 
 }

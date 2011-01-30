@@ -1,9 +1,11 @@
 package com.samsonych.service;
 
 import is.ida.lib.service.exception.ServiceException;
+
+import java.util.List;
+
 import junit.framework.Assert;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.samsonych.AppJUnit4SpringContextTests;
@@ -27,24 +29,33 @@ public class PosterTest extends AppJUnit4SpringContextTests {
     @SuppressWarnings("unchecked")
     @Test
     public final void testCreateNicheCategory() throws ServiceException {
-        
+
         Poster poster = new Poster("debt-consolidation");
         String category = poster.getNiche();
-        poster.addNicheCategory();
 
-        Taxonomy taxonomy2 = (Taxonomy) baseDBManager.executeHQLQuery(
-                String.format("from TermTaxonomy where term.name='%s'", category)).get(0);
-        Assert.assertNotNull(taxonomy2);
-        Assert.assertEquals(taxonomy2.getTerm().getName(), "debt-consolidation");
-        Assert.assertEquals(taxonomy2.getTerm().getSlug(), "Debt-Consolidation");
-        
-        baseDBManager.deleteById(taxonomy2);
+        String hqlQuery = String.format("from Taxonomy where term.name='%s'", category);
+
+        if (baseDBManager.count("select count(*) " + hqlQuery) == 0) {
+            poster.addNicheCategory();
+        }
+        Taxonomy taxonomy = (Taxonomy) baseDBManager.executeHQLQuery(hqlQuery).get(0);
+        Assert.assertNotNull(taxonomy);
+        Assert.assertEquals("debt-consolidation", taxonomy.getTerm().getName());
+        Assert.assertEquals("Debt-Consolidation", taxonomy.getTerm().getSlug());
+
+        baseDBManager.delete(taxonomy);
     }
 
     @Test
-    @Ignore
     public final void testCreateNicheTags() throws ServiceException {
         Poster poster = new Poster("debt-relief-consolidation");
-    }
+        poster.addNicheTags("loan", "debt-relief-consolidation", "Credit Card",
+                "Credit: Card, Company - Credit");
+        String hqlQuery = "from Taxonomy "
+                + "where term.name in ('debt','relief','consolidation','loan','credit','card','company')";
+        Assert.assertEquals(7, baseDBManager.count("select count(*) " + hqlQuery));
 
+        List<Taxonomy> tags = baseDBManager.executeHQLQuery(hqlQuery);
+//        baseDBManager.deleteAll(tags);
+    }
 }

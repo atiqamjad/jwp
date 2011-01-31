@@ -8,7 +8,8 @@ import com.samsonych.AppJUnit4SpringContextTests;
 
 public class GAdsGrabberTest extends AppJUnit4SpringContextTests {
 
-	private static final String EXPECTED_TITLE = "Negotiating Rates with Your Credit Card Company";
+	public static final String EXPECTED_TITLE = "Negotiating Rates with Your Credit Card Company";
+	public static final String EXPECTED_POST_NAME = "negotiating-rates-with-your-credit-card-company";
 
 	@Test
 	public final void testGetPostTitle() {

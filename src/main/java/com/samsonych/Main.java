@@ -46,6 +46,7 @@ public class Main {
             File nicheFile = new File(nichePath);
 
             String[] files = nicheFile.list(new FilenameFilter() {
+                @Override
                 public boolean accept(final File dir, final String name) {
                     return name.matches("^\\d+\\.php$");
                 }
@@ -57,7 +58,7 @@ public class Main {
             for (String file : files) {
                 String filePath = nichePath + "/" + file;
                 Post post = poster.getPostFromFile(new File(filePath));
-                post.setTaxonomies(Arrays.asList(category));
+                post.getTaxonomies().add(category);
                 LOG.debug(post.toString());
                 countPosts++;
                 try {

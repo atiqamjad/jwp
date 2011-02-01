@@ -9,13 +9,23 @@ import com.samsonych.AppJUnit4SpringContextTests;
 public class GAdsGrabberTest extends AppJUnit4SpringContextTests {
 
 	public static final String EXPECTED_TITLE = "Negotiating Rates with Your Credit Card Company";
+	public static final String UNFILTERED_POST_NAME = "\"'~[   Negotiating: Rates ----&$ *%(with) Your... = +Credit, -Card !!!Company?]\";";
 	public static final String EXPECTED_POST_NAME = "negotiating-rates-with-your-credit-card-company";
 
 	@Test
 	public final void testGetPostTitle() {
-		String title = grabber.getPostTitle();
-		Assert.assertNotNull(title);
-		Assert.assertEquals(EXPECTED_TITLE, title);
+		Assert.assertEquals(EXPECTED_TITLE, grabber.getPostTitle());
+	}
+
+	@Test
+	public final void testGetPostName() {
+		Assert.assertEquals(EXPECTED_TITLE, grabber.getPostTitle());
+	}
+
+	@Test
+	public final void testNormalizePostName() {
+		Assert.assertEquals(EXPECTED_POST_NAME,
+				grabber.normalizePostName(UNFILTERED_POST_NAME));
 	}
 
 	@Test
@@ -27,16 +37,13 @@ public class GAdsGrabberTest extends AppJUnit4SpringContextTests {
 
 	@Test
 	public final void testGetMetaKeywords() {
-		String keywords = grabber.getMetaKeywords();
-		Assert.assertNotNull(keywords);
-		Assert.assertTrue(keywords.startsWith(EXPECTED_TITLE));
+		Assert.assertTrue(grabber.getMetaKeywords().startsWith(EXPECTED_TITLE));
 	}
 
 	@Test
 	public final void testGetMetaDescription() {
-		String desc = grabber.getMetaDescription();
-		Assert.assertNotNull(desc);
-		Assert.assertTrue(desc.endsWith("articles and information on Credit"));
+		Assert.assertTrue(grabber.getMetaDescription().endsWith(
+				"articles and information on Credit"));
 	}
 
 }

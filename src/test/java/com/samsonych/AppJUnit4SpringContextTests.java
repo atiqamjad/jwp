@@ -16,7 +16,7 @@ import org.junit.Before;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
-import com.samsonych.grabber.GAdsGrabber;
+import com.samsonych.service.GAdsGrabber;
 import com.samsonych.service.dba.BaseDBManagerImpl;
 import com.samsonych.service.dba.DBManagerFactory;
 

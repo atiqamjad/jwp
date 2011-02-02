@@ -10,7 +10,7 @@
 <html>
 <head>
 <title>Negotiating Rates with Your Credit Card Company - Credit</title>
-<meta name="Keywords" content="Negotiating Rates with Your Credit Card Company, Credit, Credit articles, Credit information, about Credit, what is Credit, Credit Information">
+<meta name="Keywords" content="350 Negotiating Rates with Your Credit Card Company, Credit, Credit articles, Credit information, about Credit, what is Credit, Credit Information">
 <meta name="Description" content="Negotiating Rates with Your Credit Card Company plus articles and information on Credit">
 <link rel="STYLESHEET" type="text/css" href="inc/styles.css">
 </head>
@@ -30,7 +30,7 @@
 
 
 
-<h1>Negotiating Rates with Your Credit Card Company</h1>
+<h1> 350 Negotiating Rates with Your Credit Card Company      ?        </h1>
 <p>
 <?php include("inc/ads-top.inc"); ?>
 

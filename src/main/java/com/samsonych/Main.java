@@ -21,54 +21,55 @@ import com.samsonych.service.dba.DBManagerFactory;
 
 /**
  * @author samsonov
- * 
+ *
  */
 public class Main {
-    private static Logger LOG = Logger.getLogger(Main.class);
+	private static Logger LOG = Logger.getLogger(Main.class);
 
-    public static void main(final String[] args) {
-        ApplicationContext applicationContext = new ClassPathXmlApplicationContext(
-                "classpath:applicationContext.xml");
-        DBManagerFactory.setApplicationContext(applicationContext);
+	public static void main(final String[] args) {
+		ApplicationContext applicationContext = new ClassPathXmlApplicationContext(
+				"classpath:applicationContext.xml");
+		DBManagerFactory.setApplicationContext(applicationContext);
 
-        String gadsDir = AppManagerFactory.getAppConfig().getGadsDir();
-        LOG.debug("gadsDir=" + gadsDir);
+		String gadsDir = AppManagerFactory.getAppConfig().getGadsDir();
+		LOG.debug("gadsDir=" + gadsDir);
 
-        File dir = new File(gadsDir);
-        String[] nicheDirs = dir.list(DirectoryFileFilter.INSTANCE);
-        Arrays.sort(nicheDirs);
-        int countPosts = 0;
-        for (String niche : nicheDirs) {
-            // niche = category
+		File dir = new File(gadsDir);
+		String[] nicheDirs = dir.list(DirectoryFileFilter.INSTANCE);
+		Arrays.sort(nicheDirs);
+		int countPosts = 0;
+		for (String niche : nicheDirs) {
+			// niche = category
 
-            String nichePath = gadsDir + "/" + niche;
-            File nicheFile = new File(nichePath);
+			String nichePath = gadsDir + "/" + niche;
+			File nicheFile = new File(nichePath);
 
-            String[] files = nicheFile.list(new FilenameFilter() {
-                @Override
-                public boolean accept(final File dir, final String name) {
-                    return name.matches("^\\d+\\.php$");
-                }
-            });
-            Poster poster = new Poster(niche);
-            poster.addNicheCategory();
+			String[] files = nicheFile.list(new FilenameFilter() {
+				@Override
+				public boolean accept(final File dir, final String name) {
+					return name.matches("^\\d+\\.php$");
+				}
+			});
+			Poster poster = new Poster(niche);
+			poster.addNicheCategory();
 
-            WPManager wpManager = new WPManager();
-            for (String file : files) {
-                String filePath = nichePath + "/" + file;
-                Post post = poster.getPostFromFile(new File(filePath));
-                LOG.debug(post.toString());
-                countPosts++;
-                try {
-                    wpManager.saveOrUpdatePost(post);
-                } catch (ServiceException ex) {
-                    LOG.error(String.format("%s not saved!", post), ex);
-                }
-            }
-            LOG.info(String.format("Niche - %s(%d)", niche, files.length));
+			WPManager wpManager = new WPManager();
+			for (String file : files) {
+				String filePath = nichePath + "/" + file;
+				Post post = poster.getPostFromFile(new File(filePath));
+				countPosts++;
+				try {
+					post = wpManager.saveOrUpdatePost(post);
+					LOG.info("Added " + post.toString());
+				} catch (ServiceException ex) {
+					LOG.error(String.format("%s not saved!", post), ex);
+				}
+			}
+			LOG.info(String
+					.format("Niche - %s (%d posts)", niche, files.length));
 
-        }
-        LOG.info(String.format("Count posts: %d", countPosts));
+		}
+		LOG.info(String.format("All count posts: %d", countPosts));
 
-    }
+	}
 }

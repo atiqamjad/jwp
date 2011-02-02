@@ -1,59 +1,78 @@
 package com.samsonych.util;
 
-import static com.samsonych.util.ContentUtil.getStopWords;
+import static com.samsonych.util.ContentUtil.STOP_WORDS_TXT;
+import static com.samsonych.util.ContentUtil.getSingletonStopWords;
 import static com.samsonych.util.ContentUtil.getTagsFromString;
+import static com.samsonych.util.ContentUtil.loadStopWordsFromFile;
 import static com.samsonych.util.ContentUtil.normalizePostName;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashSet;
 import java.util.Set;
 
 import junit.framework.Assert;
 
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
+import org.springframework.core.io.ClassPathResource;
 
 public class ContentUtilTest {
-    public static final String UNFILTERED_FAKE_POST_NAME = "\"'~[ 350  /Negotiating: Rates ----&$ *%(with) Your... = +Credit, -<Card> !!!Company?]\";";
-    public static final String EXPECTED_POST_NAME = "350-Negotiating-Rates-With-Your-Credit-Card-Company";
-    public static final String EXPECTED_TITLE = "350 Negotiating Rates with Your Credit Card Company?";
-    @Test
-    public void testNormalizePostName() {
-        Assert.assertEquals(EXPECTED_POST_NAME, normalizePostName(UNFILTERED_FAKE_POST_NAME));
-    }
+	public static final String UNFILTERED_FAKE_POST_NAME = "\"'~[ 350  /Negotiating: Rates ----&$ *%(with) Your... = +Credit, -<Card> !!!Company?]\";";
+	public static final String EXPECTED_POST_NAME = "350-Negotiating-Rates-With-Your-Credit-Card-Company";
+	public static final String EXPECTED_TITLE = "350 Negotiating Rates with Your Credit Card Company?";
 
-    @Test
-    public void testGetStopWords() {
-        Assert.assertEquals(2, getTestStopListWords().size());
-    }
+	static Set<String> stopWords = null;
+	static File stopWordsFile = new File("target/test-classes" + STOP_WORDS_TXT);
 
-    @Test
-    public void testGetTagsFromString() {
-        Set<String> tags = new HashSet<String>(getTagsFromString(UNFILTERED_FAKE_POST_NAME));
-        Assert.assertEquals(7, tags.size());
-        tags.removeAll(getTestStopListWords());
-        Assert.assertEquals(5, tags.size());
-    }
+	@BeforeClass
+	public static void setUp() throws IOException {
+		createTestStopListFile(stopWordsFile);
+		ClassPathResource resource = new ClassPathResource(STOP_WORDS_TXT);
+		stopWords = loadStopWordsFromFile(resource);
+	}
 
-    private Set<String> getTestStopListWords() {
-        Set<String> stopWords = null;
-        try {
-            File file = new File("stoplist_test.txt");
-            PrintWriter writer;
-            writer = new PrintWriter(file);
-            writer.println("with");
-            writer.println("your");
-            writer.println("with");
-            writer.println("your");
-            writer.close();
-            stopWords = getStopWords(new FileInputStream(file));
-            file.delete();
-        } catch (FileNotFoundException ex) {
-            Assert.fail(ex.getMessage());
-        }
-        return stopWords;
-    }
+	@AfterClass
+	public static void tearDown() throws IOException {
+		stopWordsFile.delete();
+	}
+
+	@Test
+	public void testNormalizePostName() {
+		Assert.assertEquals(EXPECTED_POST_NAME,
+				normalizePostName(UNFILTERED_FAKE_POST_NAME));
+	}
+
+	@Test
+	public void testGetStopWords() {
+		Assert.assertEquals(2, stopWords.size());
+	}
+
+	@Test
+	public void testGetSingletonStopWords() {
+		Assert.assertTrue(getSingletonStopWords().size() > 0);
+	}
+
+	@Test
+	public void testGetTagsFromString() {
+		Set<String> tags = new HashSet<String>(
+				getTagsFromString(UNFILTERED_FAKE_POST_NAME));
+		Assert.assertEquals(7, tags.size());
+		tags.removeAll(stopWords);
+		Assert.assertEquals(5, tags.size());
+	}
+
+	private static void createTestStopListFile(final File file)
+			throws FileNotFoundException {
+		PrintWriter writer = new PrintWriter(file);
+		writer.println("with");
+		writer.println("your");
+		writer.println("with");
+		writer.println("your");
+		writer.close();
+	}
 
 }

@@ -15,7 +15,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.samsonych.model.wp.Post;
-import com.samsonych.model.wp.Taxonomy;
 import com.samsonych.service.Poster;
 import com.samsonych.service.WPManager;
 import com.samsonych.service.dba.DBManagerFactory;
@@ -52,13 +51,12 @@ public class Main {
                 }
             });
             Poster poster = new Poster(niche);
-            Taxonomy category = poster.addNicheCategory();
+            poster.addNicheCategory();
 
             WPManager wpManager = new WPManager();
             for (String file : files) {
                 String filePath = nichePath + "/" + file;
                 Post post = poster.getPostFromFile(new File(filePath));
-                post.getTaxonomies().add(category);
                 LOG.debug(post.toString());
                 countPosts++;
                 try {

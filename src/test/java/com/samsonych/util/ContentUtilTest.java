@@ -16,7 +16,7 @@ import junit.framework.Assert;
 import org.junit.Test;
 
 public class ContentUtilTest {
-    public static final String UNFILTERED_FAKE_POST_NAME = "\"'~[ 350  Negotiating: Rates ----&$ *%(with) Your... = +Credit, -<Card> !!!Company?]\";";
+    public static final String UNFILTERED_FAKE_POST_NAME = "\"'~[ 350  /Negotiating: Rates ----&$ *%(with) Your... = +Credit, -<Card> !!!Company?]\";";
     public static final String EXPECTED_POST_NAME = "350-Negotiating-Rates-With-Your-Credit-Card-Company";
     public static final String EXPECTED_TITLE = "350 Negotiating Rates with Your Credit Card Company?";
     @Test

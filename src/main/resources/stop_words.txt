@@ -1,3 +1,7 @@
+amp
+article
+articles
+information
 a
 ii
 about

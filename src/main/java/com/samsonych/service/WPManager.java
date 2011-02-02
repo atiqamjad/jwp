@@ -24,7 +24,7 @@ import com.samsonych.service.dba.DBManagerFactory;
  */
 public class WPManager {
 
-	private static final String HQL_TAXONOMY = "from Taxonomy t where t.term.name in ('%s') and t.taxonomyType='%s'";
+	static final String HQL_TAXONOMY = "from Taxonomy t where t.term.name in ('%s') and t.taxonomyType='%s'";
 
 	private static Logger LOG = Logger.getLogger(WPManager.class);
 

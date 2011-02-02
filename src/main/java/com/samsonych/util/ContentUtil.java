@@ -37,7 +37,7 @@ public final class ContentUtil {
     }
 
     private static String cleanWords(final String str) {
-        return str.replaceAll("[-!?\\:=\\+\\[\\]\\(\\)&%$*#~\"';.,<>]", " ").trim();
+        return str.replaceAll("[-!?\\:=\\+\\[\\]\\(\\)&%$*#~\"';.,<>/]", " ").trim();
     }
 
     private static String deleteDigits(final String str) {
@@ -45,7 +45,8 @@ public final class ContentUtil {
     }
 
     public static List<String> getTagsFromString(final String str) {
-        return Arrays.asList(deleteDigits(cleanWords(str)).toLowerCase().split("\\s+"));
+        String[] tags = deleteDigits(cleanWords(str)).toLowerCase().split("\\s+");
+        return Arrays.asList(tags);
     }
 
     public static Set<String> getStopWords(final InputStream fin) {

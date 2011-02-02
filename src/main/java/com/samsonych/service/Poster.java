@@ -37,7 +37,7 @@ public class Poster {
 
     private String niche;
 
-    private final List<Taxonomy> taxonomies = new ArrayList<Taxonomy>();
+    private Taxonomy nicheCategory;
 
     public Poster(final String niche) {
         this.niche = niche;
@@ -53,14 +53,13 @@ public class Poster {
 
     public Post getPostFromFile(final File file) {
         GAdsGrabber grabber = new GAdsGrabber(file);
-
         Post post = Post.createDefaultPost();
         post.setPostAuthor(getAuthor());
         post.setPostTitle(grabber.getPostTitle());
         post.setPostName(grabber.getPostName());
         post.setPostContent(grabber.getPostContent());
-        taxonomies.addAll(addNicheTags(grabber.getMetaKeywords()));
-        post.setTaxonomies(taxonomies);
+        post.setTaxonomies(addNicheTags(grabber.getMetaKeywords()));
+        post.getTaxonomies().add(nicheCategory);
         LOG.trace(String.format("Processing niche file [%s/%s] ...", niche, file.getName()));
         return post;
     }
@@ -78,22 +77,21 @@ public class Poster {
 
     public Taxonomy addNicheCategory() {
         String category = WordUtils.capitalizeFully(niche, DELIMITERS);
-        Taxonomy result = null;
         try {
             // check if category exist
-            result = wpManager.getTaxonomyCategory(category);
-            if (result == null) {
+            nicheCategory = wpManager.getTaxonomyCategory(category);
+            if (nicheCategory == null) {
                 // create new category
                 String slug = String.format(CAT_SLUG, category.toLowerCase());
                 String desc = String.format(CAT_DESC, category);
-                Taxonomy cat = Taxonomy.createCategory(category, slug, desc);
-                result = wpManager.saveOrUpdateTaxonomy(cat);
+                nicheCategory = wpManager.saveOrUpdateTaxonomy(Taxonomy.createCategory(category,
+                        slug, desc));
             }
         } catch (ServiceException ex) {
             LOG.error("addNicheCategory error", ex);
         }
-        result.setCount(result.getCount() + 1);
-        return result;
+        nicheCategory.setCount(nicheCategory.getCount() + 1);
+        return nicheCategory;
     }
 
     List<Taxonomy> addNicheTags(final String... keywords) {
@@ -123,6 +121,7 @@ public class Poster {
                     String desc = String.format(TAG_DESC, tag);
                     taxonomyTag = Taxonomy.createTag(tag, slug, desc);
                 }
+                taxonomyTag.setCount(taxonomyTag.getCount() + 1);
                 result.add(taxonomyTag);
             }
             result = wpManager.saveOrUpdateTaxonomyAll(result);

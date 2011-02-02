@@ -6,12 +6,14 @@ import java.util.List;
 
 import junit.framework.Assert;
 
+import org.apache.commons.lang.StringUtils;
 import org.junit.Ignore;
 import org.junit.Test;
 
 import com.samsonych.AppJUnit4SpringContextTests;
 import com.samsonych.model.wp.Post;
 import com.samsonych.model.wp.Taxonomy;
+import com.samsonych.model.wp.TaxonomyType;
 import com.samsonych.util.ContentUtilTest;
 
 public class PosterTest extends AppJUnit4SpringContextTests {
@@ -42,11 +44,15 @@ public class PosterTest extends AppJUnit4SpringContextTests {
         Poster poster = new Poster("debt-relief-consolidation");
         poster.addNicheTags("loan", "debt-relief-consolidation", "7 Credit Card?",
                 "Credit: Card, Company - Credit!");
-        String hqlQuery = "from Taxonomy "
-                + "where term.name in ('Debt','Relief','Consolidation','Loan','Credit','Card','Company')";
+
+        String[] tagsArr = new String[] { "Debt", "Relief", "Consolidation", "Loan", "Credit",
+                "Card", "Company" };
+
+        String hqlQuery = String.format(WPManager.HQL_TAXONOMY, StringUtils.join(tagsArr, "','"),
+                TaxonomyType.post_tag);
 
         int tagsCounts = baseDBManager.count("select count(*) " + hqlQuery);
-        Assert.assertEquals(7, tagsCounts);
+        Assert.assertEquals(tagsArr.length, tagsCounts);
 
         List<Taxonomy> tags = baseDBManager.executeHQLQuery(hqlQuery);
         baseDBManager.deleteAll(tags);
@@ -61,9 +67,8 @@ public class PosterTest extends AppJUnit4SpringContextTests {
     @Test
     public final void testGetPostFromFile() throws ServiceException {
         Poster poster = new Poster("credit");
+        poster.addNicheCategory();
         Post post = poster.getPostFromFile(testFile);
-        Taxonomy category = poster.addNicheCategory();
-        post.getTaxonomies().add(category);
         post = (Post) baseDBManager.saveOrUpdate(post);
         Assert.assertEquals(ContentUtilTest.EXPECTED_POST_NAME, post.getPostName());
         Assert.assertEquals(ContentUtilTest.EXPECTED_TITLE, post.getPostTitle());

@@ -59,8 +59,8 @@ public final class ContentUtil {
 	public static Set<String> getSingletonStopWords() {
 
 		if (stopWords == null) {
-			stopWords = loadStopWordsFromFile(new ClassPathResource(
-					STOP_WORDS_TXT));
+			stopWords = loadStopWordsFromFile(new ClassPathResource("/conf"
+					+ STOP_WORDS_TXT));
 		}
 		return stopWords;
 

@@ -22,7 +22,7 @@
   </bean>
 
   <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-    <property name="locations" value="classpath:app.properties" />
+    <property name="locations" value="classpath:conf/app.properties" />
   </bean>
 
   <bean id="appConfig" class="com.samsonych.AppConfig">

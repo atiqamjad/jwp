@@ -22,7 +22,7 @@ import com.samsonych.util.ContentUtil;
 
 /**
  * @author samsonov
- * 
+ *
  */
 public class GAdsGrabber implements IWPGrabber {
 
@@ -80,6 +80,7 @@ public class GAdsGrabber implements IWPGrabber {
 
     @Override
     public String getPostTitle() {
+    	//TODO multiline process
         String result = findMatchFromCharBuffer("^<h1\\>(.*)<\\/h1>$");
         result = ContentUtil.normalizeWhitespaces(result);
         LOG.debug(String.format("Title post = '%s'", result));

@@ -25,7 +25,7 @@ import com.samsonych.service.dba.DBManagerFactory;
  * @version $Id: ACPSJUnit4SpringContextTests.java 1014 2010-10-23 11:52:30Z homyakov $
  */
 @ContextConfiguration(locations = { "classpath:applicationContext.xml" })
-public class AppJUnit4SpringContextTests extends AbstractJUnit4SpringContextTests {
+abstract public class AppJUnit4SpringContextTests extends AbstractJUnit4SpringContextTests {
 
     protected static final String TEST_FILE = "/7777.php";
     protected static BaseDBManagerImpl baseDBManager;

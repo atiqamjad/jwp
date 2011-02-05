@@ -17,6 +17,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
 import com.samsonych.service.GAdsGrabber;
+import com.samsonych.service.IWPGrabber;
 import com.samsonych.service.dba.BaseDBManagerImpl;
 import com.samsonych.service.dba.DBManagerFactory;
 
@@ -29,7 +30,7 @@ abstract public class AppJUnit4SpringContextTests extends AbstractJUnit4SpringCo
 
     protected static final String TEST_FILE = "/7777.php";
     protected static BaseDBManagerImpl baseDBManager;
-    protected static GAdsGrabber grabber;
+    protected static IWPGrabber grabber;
     protected static File testFile;
 
     @Before
@@ -38,7 +39,8 @@ abstract public class AppJUnit4SpringContextTests extends AbstractJUnit4SpringCo
         if (baseDBManager == null) {
             baseDBManager = DBManagerFactory.getBaseDBManager();
             testFile = new File(getClass().getResource(TEST_FILE).toURI());
-            grabber = new GAdsGrabber(testFile);
+            grabber = new GAdsGrabber();
+            grabber.grab(testFile);
         }
     }
 

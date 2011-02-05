@@ -2,6 +2,7 @@ package com.samsonych.service;
 
 import is.ida.lib.service.exception.ServiceException;
 
+import java.net.URISyntaxException;
 import java.util.List;
 
 import junit.framework.Assert;
@@ -18,11 +19,18 @@ import com.samsonych.util.ContentUtilTest;
 
 public class PosterTest extends AppJUnit4SpringContextTests {
 
+    private Poster poster;
+
+    @Override
+    public void initialize() throws ServiceException, URISyntaxException {
+        super.initialize();
+        poster = new Poster(grabber);
+    }
+
     @SuppressWarnings("unchecked")
     @Test
     public final void testCreateNicheCategory() throws ServiceException {
-
-        Poster poster = new Poster("debt-consolidation");
+        poster.setNiche("debt-consolidation");
         String category = poster.getNiche();
 
         String hqlQuery = String.format("from Taxonomy where term.name='%s'", category);
@@ -41,7 +49,7 @@ public class PosterTest extends AppJUnit4SpringContextTests {
     @SuppressWarnings("unchecked")
     @Test
     public final void testCreateNicheTags() throws ServiceException {
-        Poster poster = new Poster("debt-relief-consolidation");
+        poster.setNiche("debt-relief-consolidation");
         poster.addNicheTags("loan", "debt-relief-consolidation", "7 Credit Card?",
                 "Credit: Card, Company - Credit!");
 
@@ -66,12 +74,13 @@ public class PosterTest extends AppJUnit4SpringContextTests {
     @SuppressWarnings("unchecked")
     @Test
     public final void testGetPostFromFile() throws ServiceException {
-        Poster poster = new Poster("credit");
+        poster.setNiche("credit");
         poster.addNicheCategory();
         Post post = poster.getPostFromFile(testFile);
         post = (Post) baseDBManager.saveOrUpdate(post);
         Assert.assertEquals(ContentUtilTest.EXPECTED_POST_NAME, post.getPostName());
         Assert.assertEquals(ContentUtilTest.EXPECTED_TITLE, post.getPostTitle());
+        baseDBManager.deleteAll(post.getTaxonomies());
+        baseDBManager.delete(post);
     }
-
 }

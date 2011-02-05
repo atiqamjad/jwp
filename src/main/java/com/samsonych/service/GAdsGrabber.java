@@ -30,7 +30,8 @@ public class GAdsGrabber implements IWPGrabber {
 
     private CharBuffer charBuffer;
 
-    public GAdsGrabber(final File file) {
+    @Override
+    public void grab(final File file) {
         LOG.debug(String.format("Grabing file - %s ", file.getAbsolutePath()));
         try {
             charBuffer = getBuffer(new FileInputStream(file));
@@ -80,8 +81,10 @@ public class GAdsGrabber implements IWPGrabber {
 
     @Override
     public String getPostTitle() {
-    	//TODO multiline process
-        String result = findMatchFromCharBuffer("^<h1\\>(.*)<\\/h1>$");
+        String result = findMatchFromCharBuffer("(?msi)^<h1>(.*)<\\/h1>$");
+        if(result == null){
+            result = findMatchFromCharBuffer("(?msi)^<title>(.*)<\\/title>$");
+        }
         result = ContentUtil.normalizeWhitespaces(result);
         LOG.debug(String.format("Title post = '%s'", result));
         return result;
@@ -96,7 +99,7 @@ public class GAdsGrabber implements IWPGrabber {
 
     @Override
     public String getMetaKeywords() {
-        String regexp = "^<meta name=\"Keywords\" content=\"(.*)\">$";
+        String regexp = "(?msi)^<meta name=\"Keywords\" content=\"(.*?)\">$";
         String result = findMatchFromCharBuffer(regexp);
         LOG.debug(String.format("Meta keywords post = '%s'", result));
         return result;
@@ -104,7 +107,7 @@ public class GAdsGrabber implements IWPGrabber {
 
     @Override
     public String getMetaDescription() {
-        String regexp = "^<meta name=\"Description\" content=\"(.*)\">$";
+        String regexp = "(?msi)^<meta name=\"Description\" content=\"(.*?)\">$";
         String result = findMatchFromCharBuffer(regexp);
         LOG.debug(String.format("Meta description post = '%s'", result));
         return result;

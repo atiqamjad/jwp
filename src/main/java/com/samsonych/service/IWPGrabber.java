@@ -1,5 +1,7 @@
 package com.samsonych.service;
 
+import java.io.File;
+
 public interface IWPGrabber {
 
 	String getPostTitle();
@@ -11,5 +13,7 @@ public interface IWPGrabber {
 	String getMetaKeywords();
 
 	String getMetaDescription();
+
+    void grab(File testFile);
 
 }

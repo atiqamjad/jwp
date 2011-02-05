@@ -5,6 +5,10 @@
   <artifactId>gads</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>wp content importer</name>
+  <scm>
+    <connection>scm:svn:svn://samsonov.isida.by/trunk/com.samsonych.wpgads</connection>
+    <developerConnection>scm:svn:svn://samsonov.isida.by/trunk/com.samsonych.wpgads</developerConnection>
+  </scm>
   <build>
     <plugins>
       <plugin>
@@ -29,12 +33,7 @@
           <descriptors>
             <descriptor>src/main/assembly/bin.xml</descriptor>
           </descriptors>
-<!--
-          <descriptorRefs>
-            <descriptorRef>jar-with-dependencies</descriptorRef>
-            <descriptorRef>bin</descriptorRef>
-          </descriptorRefs>
--->
+          <!-- <descriptorRefs> <descriptorRef>jar-with-dependencies</descriptorRef> <descriptorRef>bin</descriptorRef> </descriptorRefs> -->
           <archive>
             <manifest>
               <mainClass>com.samsonych.Main</mainClass>

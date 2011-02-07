@@ -73,7 +73,7 @@ public class GAdsGrabber implements IWPGrabber {
         int startIndex = string.indexOf(startStr) + startStr.length();
         int endIndex = string.indexOf(endStr);
         // with delete CR's
-        String result = string.substring(startIndex, endIndex).replaceAll("\r|\n", "");
+        String result = processContent(string.substring(startIndex, endIndex));
         LOG.trace(String.format("Post content [%s]", result));
         LOG.debug("post content size = " + result.length());
         return result;
@@ -90,11 +90,15 @@ public class GAdsGrabber implements IWPGrabber {
         return result;
     }
 
-    public String clearTrash(final String str) {
+    public String processContent(final String str) {
+        // with delete CR's
+        String result = str.replaceAll("(?i)<p>|<br\\s*\\/?>|\r|\n", "");
+        result = result.replaceAll("(?i)<\\/p>", "\n\n");
         // delete '<p></p>'
         // - <br />
         // <a href="">
-        return str;
+        result = result.replaceAll("(?msi)\\(\\s*<a.*?<\\/a>\\s*\\)", "");
+        return result;
     }
 
     @Override

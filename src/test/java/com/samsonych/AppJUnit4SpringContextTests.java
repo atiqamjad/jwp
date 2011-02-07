@@ -12,6 +12,7 @@ import is.ida.lib.service.exception.ServiceException;
 import java.io.File;
 import java.net.URISyntaxException;
 
+import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
@@ -28,6 +29,8 @@ import com.samsonych.service.dba.DBManagerFactory;
 @ContextConfiguration(locations = { "classpath:applicationContext.xml" })
 abstract public class AppJUnit4SpringContextTests extends AbstractJUnit4SpringContextTests {
 
+    protected Logger log = Logger.getLogger(getClass());
+    
     protected static final String TEST_FILE = "/7777.php";
     protected static BaseDBManagerImpl baseDBManager;
     protected static IWPGrabber grabber;

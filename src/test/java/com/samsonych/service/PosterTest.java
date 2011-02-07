@@ -50,8 +50,8 @@ public class PosterTest extends AppJUnit4SpringContextTests {
     @Test
     public final void testCreateNicheTags() throws ServiceException {
         poster.setNiche("debt-relief-consolidation");
-        poster.addNicheTags("loan", "debt-relief-consolidation", "7 Credit Card?",
-                "Credit: Card, Company - Credit!");
+        poster.addNicheTags("loan", "debt-relief-consolidation", "7 Credit Cards?",
+                "Credits: Card, Company - Credit daily consolidating credited!");
 
         String[] tagsArr = new String[] { "Debt", "Relief", "Consolidation", "Loan", "Credit",
                 "Card", "Company" };
@@ -63,6 +63,7 @@ public class PosterTest extends AppJUnit4SpringContextTests {
         Assert.assertEquals(tagsArr.length, tagsCounts);
 
         List<Taxonomy> tags = baseDBManager.executeHQLQuery(hqlQuery);
+        log.debug(tags);
         baseDBManager.deleteAll(tags);
     }
 

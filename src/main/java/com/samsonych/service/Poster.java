@@ -11,7 +11,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.WordUtils;
 import org.apache.log4j.Logger;
 
@@ -27,9 +26,9 @@ import com.samsonych.util.ContentUtil;
 public class Poster {
 
     private static final String CAT_SLUG = "%s";
-    private static final String CAT_DESC = "Description for category '%s'";
+    private static final String CAT_DESC = "'%s'";
     private static final String TAG_SLUG = "tag-%s";
-    private static final String TAG_DESC = "Description for tag '%s'";
+    private static final String TAG_DESC = "'%s'";
     private static final char[] DELIMITERS = new char[] { '-', '_', '.' };
     private static Logger LOG = Logger.getLogger(Poster.class);
     private static WPManager wpManager = new WPManager();
@@ -113,11 +112,20 @@ public class Poster {
         List<Taxonomy> result = new ArrayList<Taxonomy>(tags.size());
         try {
             for (String tag : tags) {
-                if (StringUtils.isEmpty(tag))
+                // if (StringUtils.isEmpty(tag) || tag.matches("ed|ly|ing$"))
+                if (tag.matches(".*(ed|ly)$"))
                     continue;
                 // check if tag exist
                 tag = WordUtils.capitalizeFully(tag);
-                Taxonomy taxonomyTag = wpManager.getTaxonomyTag(tag);
+                Taxonomy taxonomyTag = null;
+                // check if tag is plural word
+                if (tag.endsWith("s")) {
+                    taxonomyTag = wpManager.getTaxonomyTag(tag.substring(0, tag.length() - 2));
+                    LOG.debug(String.format("'%s' - plural tag %s", tag, taxonomyTag));
+                }
+                if (taxonomyTag == null) {
+                    taxonomyTag = wpManager.getTaxonomyTag(tag);
+                }
                 if (taxonomyTag == null) {
                     // create new tag
                     String slug = String.format(TAG_SLUG, tag.toLowerCase());

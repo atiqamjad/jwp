@@ -22,7 +22,7 @@ import com.samsonych.util.ContentUtil;
 
 /**
  * @author samsonov
- * 
+ *
  */
 public class GAdsGrabber implements IWPGrabber {
 
@@ -98,15 +98,23 @@ public class GAdsGrabber implements IWPGrabber {
         // <ul>
         result = result.replaceAll("(?i)<li>(.*)\n", "<li>$1</li>");
 
-        // <ol>
-        result = result.replaceAll("\\d+[.)]\\s+(.*)\n", "<li>$1</li>");      
-        
+        // <ol> unstable
+/*
+        result = result.replaceAll("\\d+[.)]\\s+(.*)\n", "<li>$1</li>");
+
         result = result.replaceFirst("(?i)<li>", "<ul>\n<li>");
         result = result.replaceFirst("(?i)<\\/li>\n{2,}", "</li>\n</ul>\n");
-        
+*/
         // delete '(<a>...</a>)'
         result = result.replaceAll("(?msi)\\(\\s*<a.*?<\\/a>\\s*\\)", "");
          result = result.replaceAll("\n{3,}", "\n\n");
+
+         // 1) определить последние 2 абзаца
+         // удалить абзац если в нем есть:
+         	// - ссылки;
+         	// - слова "contact","visit","author","writer", "articles?", "copyright", "(c)", "&copy;", "©"
+        //	2) если есть фраза "" удалить всё что после нее
+        result = result.replaceAll("(?msi)\n(About The Author|[#@%=+-_$*]{5,}).*", "");
         return result;
     }
 

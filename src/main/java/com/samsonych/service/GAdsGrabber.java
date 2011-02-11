@@ -22,7 +22,7 @@ import com.samsonych.util.ContentUtil;
 
 /**
  * @author samsonov
- *
+ * 
  */
 public class GAdsGrabber implements IWPGrabber {
 
@@ -82,7 +82,7 @@ public class GAdsGrabber implements IWPGrabber {
     @Override
     public String getPostTitle() {
         String result = findMatchFromCharBuffer("(?msi)^<h1>(.*)<\\/h1>$");
-        if(result == null){
+        if (result == null) {
             result = findMatchFromCharBuffer("(?msi)^<title>(.*)<\\/title>$");
         }
         result = ContentUtil.normalizeWhitespaces(result);
@@ -92,12 +92,21 @@ public class GAdsGrabber implements IWPGrabber {
 
     public String processContent(final String str) {
         // with delete CR's
-        String result = str.replaceAll("(?i)<p>|<br\\s*\\/?>|\r|\n", "");
+        String result = str;
+        result = result.replaceAll("(?i)<p>|<br\\s*\\/?>|\r|\n", "");
         result = result.replaceAll("(?i)<\\/p>", "\n\n");
-        // delete '<p></p>'
-        // - <br />
-        // <a href="">
+        // <ul>
+        result = result.replaceAll("(?i)<li>(.*)\n", "<li>$1</li>");
+
+        // <ol>
+        result = result.replaceAll("\\d+[.)]\\s+(.*)\n", "<li>$1</li>");      
+        
+        result = result.replaceFirst("(?i)<li>", "<ul>\n<li>");
+        result = result.replaceFirst("(?i)<\\/li>\n{2,}", "</li>\n</ul>\n");
+        
+        // delete '(<a>...</a>)'
         result = result.replaceAll("(?msi)\\(\\s*<a.*?<\\/a>\\s*\\)", "");
+         result = result.replaceAll("\n{3,}", "\n\n");
         return result;
     }
 

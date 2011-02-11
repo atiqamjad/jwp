@@ -81,7 +81,7 @@ public class PosterTest extends AppJUnit4SpringContextTests {
         post = (Post) baseDBManager.saveOrUpdate(post);
         Assert.assertEquals(ContentUtilTest.EXPECTED_POST_NAME, post.getPostName());
         Assert.assertEquals(ContentUtilTest.EXPECTED_TITLE, post.getPostTitle());
-        baseDBManager.deleteAll(post.getTaxonomies());
-        baseDBManager.delete(post);
+//        baseDBManager.deleteAll(post.getTaxonomies());
+//        baseDBManager.delete(post);
     }
 }

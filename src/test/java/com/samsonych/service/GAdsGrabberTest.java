@@ -8,6 +8,7 @@ import junit.framework.Assert;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.samsonych.TestUtil;
@@ -53,6 +54,7 @@ public class GAdsGrabberTest {
 	}
 
 	@Test
+	//@Ignore
 	public final void testProcessContent() throws IOException {
 		String test = FileUtils.readFileToString(TestUtil
 				.getTestFile("test1.txt"));

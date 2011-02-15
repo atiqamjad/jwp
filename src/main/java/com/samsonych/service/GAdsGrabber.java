@@ -15,6 +15,7 @@ import java.nio.channels.FileChannel.MapMode;
 import java.nio.charset.Charset;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 import org.apache.log4j.Logger;
 
@@ -113,29 +114,50 @@ public class GAdsGrabber implements IWPGrabber {
 	public static String processContent(final String str) {
 		// with delete CR's
 		String result = str;
-		result = result.replaceAll("(?i)<p>|<br\\s*\\/?>|\r|\n", "");
-		result = result.replaceAll("(?i)<\\/p>", "\n\n");
-		// <ul>
-		result = result.replaceAll("(?i)<li>(.*)\n", "<li>$1</li>");
-		result = result.replaceFirst("(?i)<li>", "<ul>\n<li>");
-		result = result.replaceFirst("(?i)<\\/li>\n{2,}", "</li>\n</ul>\n");
 
-		// <ol> unstable
-		/*
-		 * result = result.replaceAll("\\d+[.)]\\s+(.*)\n", "<li>$1</li>");
-		 */
-		// delete '(<a>...</a>)'
-		result = result.replaceAll("(?msi)\\(\\s*<a.*?<\\/a>\\s*\\)", "");
-		result = result.replaceAll("\n{3,}", "\n\n");
+		// define paragraphs
+		// "<p>((\w+\W*[^:,.]){6})</p>"
 
-		// 1) определить последние 2 абзаца
-		// удалить абзац если в нем есть:
-		// - ссылки;
-		// - слова "contact","visit","author","writer", "articles?",
-		// "copyright", "(c)", "&copy;", "©"
-		// 2) если есть фраза "" удалить всё что после нее
-		result = result.replaceAll(
-				"(?msi)\n(About The Author|[-+_#@%=$*]{4,}).*", "");
+		try {
+			// String regex = "(?i)<p>((\\w+[-,.?!\\s]*)+)<\\/p>";
+			String regex = "<p>(([a-zA-Z0-9]+\\W*)+)</p>";
+			result = result.replaceAll(regex, "<h3>$1</h3>");
+
+			/*
+			 * result = result.replaceAll("(?i)<p>|<br\\s*\\/?>|\r|\n", "");
+			 * result = result.replaceAll("(?i)<\\/p>", "\n\n"); // <ul> result
+			 * = result.replaceAll("(?i)<li>(.*)\n", "<li>$1</li>"); result =
+			 * result.replaceFirst("(?i)<li>", "<ul>\n<li>"); result =
+			 * result.replaceFirst("(?i)<\\/li>\n{2,}", "</li>\n</ul>\n");
+			 */
+			// <ol> unstable
+			/*
+			 * result = result.replaceAll("\\d+[.)]\\s+(.*)\n", "<li>$1</li>");
+			 */
+			// delete '(<a>...</a>)'
+			result = result.replaceAll("(?msi)\\(\\s*<a.*?<\\/a>\\s*\\)", "");
+			result = result.replaceAll("\n{3,}", "\n\n");
+
+			// 1) определить последние 2 абзаца
+			// удалить абзац если в нем есть:
+			// - ссылки;
+			// - слова "contact","visit","author","writer", "articles?",
+			// "copyright", "(c)", "&copy;", "©"
+			// 2) если есть фраза "" удалить всё что после нее
+			result = result.replaceAll(
+					"(?msi)\n(About The Author|[-+_#@%=$*]{4,}).*", "");
+		} catch (PatternSyntaxException ex) {
+			LOG.debug("Syntax error in the regular expression", ex);
+		} catch (IllegalArgumentException ex) {
+			LOG.debug(
+					"Syntax error in the replacement text (unescaped $ signs?)",
+					ex);
+		} catch (IndexOutOfBoundsException ex) {
+
+			LOG.debug("Non-existent backreference used the replacement text",
+					ex);
+		}
+
 		return result;
 	}
 

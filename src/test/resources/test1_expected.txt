@@ -1,4 +1,9 @@
 <h3>One line paragraph</h3>
+<h3>One line paragraph</h3>
+<p>One two</p>
+<p>One, two three four.</p>
+<h3>One two, three four 5 six!</h3>
+<p>One two, three four 5 six seven eight nine!</p>
 
 Begin unordered list #1
 <ul>
@@ -25,10 +30,11 @@ Begin ordered list #2
 <li>item2 of the ordered list #2</li>
 <li>item3 of the ordered list #2</li>
 <li>item4 of the ordered list #2</li>
-<ol>
+</ol>
 
 To sum up:
 <ol>
 <li>Don't play in traffic. It's hazardous to your health.</li>
 <li>Explain the value in your offers and deliver what you promise (preferably more).</li>
 <li>Don't hide your best benefits and offers. Put them right out front so your prospects will become happy customers.</li>
+</ol>

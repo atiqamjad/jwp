@@ -1,0 +1,34 @@
+<h3>One line paragraph</h3>
+
+Begin unordered list #1
+<ul>
+<li>item1 of the unordered list #1</li>
+<li>item2 of the unordered list #1</li>
+<li>item3 of the unordered list #1</li>
+<li>item4 of the unordered list #1</li>
+<li>item5 of the unordered list #1</li>
+<li>item6 of the unordered list #1</li>
+<li>item7 of the unordered list #1</li>
+</ul>
+
+Begin ordered list #1
+<ol>
+<li>item1 of the ordered list #1</li>
+<li>item2 of the ordered list #1</li>
+<li>item3 of the ordered list #1</li>
+<li>item4 of the ordered list #1</li>
+</ol>
+
+Begin ordered list #2
+<ol>
+<li>item1 of the ordered list #2</li>
+<li>item2 of the ordered list #2</li>
+<li>item3 of the ordered list #2</li>
+<li>item4 of the ordered list #2</li>
+<ol>
+
+To sum up:
+<ol>
+<li>Don't play in traffic. It's hazardous to your health.</li>
+<li>Explain the value in your offers and deliver what you promise (preferably more).</li>
+<li>Don't hide your best benefits and offers. Put them right out front so your prospects will become happy customers.</li>

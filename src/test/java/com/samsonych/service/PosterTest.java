@@ -80,7 +80,7 @@ public class PosterTest extends AppJUnit4SpringContextTests {
 		poster.setNiche("credit");
 		poster.addNicheCategory();
 
-		Post post = poster.getPostFromFile(TestUtil.getTestFile());
+		Post post = poster.getPostFromFile(TestUtil.getGadsTestFile());
 		post = (Post) baseDBManager.saveOrUpdate(post);
 		Assert.assertEquals(ContentUtilTest.EXPECTED_POST_NAME,
 				post.getPostName());

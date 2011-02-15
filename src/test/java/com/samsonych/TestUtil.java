@@ -10,18 +10,22 @@ import com.samsonych.service.GAdsGrabber;
 import com.samsonych.service.IWPGrabber;
 
 public class TestUtil {
-	public static final String TEST_FILE = "/7777.php";
+	public static final String TEST_FILE = "7777.php";
 
 	public static IWPGrabber initGrabber() throws ServiceException {
 		IWPGrabber result = new GAdsGrabber();
-		result.grab(getTestFile());
+		result.grab(getGadsTestFile());
 		return result;
 	}
 
-	public static File getTestFile() {
+	public static File getGadsTestFile() {
+		return getTestFile(TEST_FILE);
+	}
+
+	public static File getTestFile(String fileName) {
 		try {
-			URI uri = Runtime.getRuntime().getClass().getResource(TEST_FILE)
-					.toURI();
+			URI uri = Runtime.getRuntime().getClass()
+					.getResource("/" + fileName).toURI();
 			return new File(uri);
 		} catch (URISyntaxException ex) {
 		}

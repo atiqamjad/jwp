@@ -8,15 +8,15 @@
 <br  />
 Begin unordered list #1
 <li>item1 of the unordered list #1.
-<li>item2 
+<li>item2
 
 of the unordered list #1?</li>
 <li>item3 of the unordered list #1!</li><li>  item4 of the unordered list #1
 
 <li>item5 of the unordered list #1;
 <li>item6 of the unordered list #1$<li>item7 of the unordered list #1
-
-Begin ordered list #1
+<p>
+Begin ordered list #1</p>
 1)item1 of the ordered list #1
 2)   item2 of the ordered list #1
 3)item3 of    the ordered list #1
@@ -28,13 +28,5 @@ Begin ordered list #2
 3.item3 of the ordered list #2
 4.item4 of the ordered list #2
 
-<p>To sum up:</p>
-<P>1 - Don't play in traffic. It's hazardous to your health.</P>
-<P>2 -  Explain the value in your offers and deliver what you promise (preferably more).</P>
-<P>3 -Don't hide your best benefits and offers. Put them right out front so your prospects will become happy customers.</P>
-<P>Yours in success,</P>
-<P>Shawn Casey</P>
-<P>P.S. If you missed the incredible Jeff Paul teleseminar this week - or just want to review it and take some more notes (Jeff talks fast and delivers a lot of info), you c
-<P><A target="_new" href="http://www.ShawnsNews.net/JeffPaulRecording.html">http://www.ShawnsNews.net/JeffPaulRecording.html</A></P>
-<P>(Scroll down a little when you get there)</P><p>Internet Millionaire Shawn Casey's "Mining Gold On the Internet" is one of the best selling Internet books with over 85,00
-<?php include("inc/ads-body.inc"); ?>
+<p>Do you remember how proud you were the first time you saw your name in print?</p><p>Most entrepreneurs feel that same flush of pride when they gaze on their new business cards. That small piece of paper represents years of planning and effort and hard work and dreams. The thrill of seeing "your name in print" on a business card is hard to beat.</p><p>Unfortunately, other people couldn't care less. Your business card, the one you're so proud of, is just another advertisement ? another piece of clutter to file. It's no more or less important than any of the many business cards that cross a prospect's desk at any given point in time.</p><p>So how do you make sure that your card is one of the few that attracts attention, gets kept, filed, and actually used when your prospect needs your product or service?</p><p>It pays to think about the reasons people keep cards to begin with. Often, it's not for the reason you expect. Understanding this critical concept can dramatically affect the design and ultimate effectiveness of your card.</p><p>Let's say that you install and maintain swimming pools. You meet Nancy Newcomer and have a great conversation about landscaping around in-ground pools. You're eager to conclude the conversation by giving her your business card because she certainly displays a lot of interest in your service. She's a "hot prospect" for sure!</p><p>Not necessarily.</p><p>Nancy could just as easily be asking because her neighbor has a pool, or because her mom had a bad experience when they installed their pool, or because she's always liked to swim and loves plants too, or because she collects business cards and doesn't have one with a pool on it, or because she's new in town and you're the only friendly person she met today.</p><p>In fact, according to Dr. Lynella Grant, author of "The Business Card Book", there are eight reasons that someone may decide to keep your business card.</p><p>1.	As a link to a potential customer or client</p><p>Let's say you're in network marketing, and John Johnson mentions that his wife used to be in MLM, too. She liked the business model but just wasn't happy with the company. Odds are you'll keep John's card because it's a means of contacting John's wife about your own business opportunity.</p><p>2.	As a link to a resource or a supplier</p><p>If you're in the construction business and meet someone who sells hard-to-find lighting and fixtures, you'll probably keep their business card.</p><p>3.	As a link to a colleague</p><p>Many business people keep business cards of colleagues and competitors. Perhaps you refer business to each other during busy periods, or work together as members of an industry association.</p><p>4.	For social, non-business reasons</p><p>Maybe you couldn't care less that Kelly sells car insurance. She's awfully cute, though...</p><p>5.	For referring business - it may be passed on to someone else</p><p>If your neighbor has had a hard time finding someone who washes windows, and you meet someone who's just started a residential window washing service, you'll probably accept their business card and pass it on to your neighbor.</p><p>6.	To update information they already have</p><p>Maybe they have an old card of yours with your old phone number on it, or without your website address.</p><p>7.	"Just in case"</p><p>Some people have a hard time parting with anything because they might need it someday.</p><p>8.	Finally, a business card may be kept because of something likable, unusual or useful about the person or their card</p><p>I kept the business card of a police officer named "Sarah Justice" just because I think she's got a great name for her line of work (it's called an "aptronym"). Other people keep business cards that contain useful information such as amortization schedules or lists of emergency phone numbers.</p><p>Keep these reasons in mind when designing your card. Make it clear what you do and who you do it for. Your card may be passed on to someone else, or the recipient may be trying to remember you later after a long day of meeting people at a convention.</p><p>More strategies:</p><p><ul></p><p><li>Add useful information to the back of your card.</p><p><li>Get in the habit of jotting notes on the back of business cards ("Likes football. Send catalog.") Encourage card recipients to do the same.</p><p><li>Ask people who receive your cards to pass them on and reward them for referring business to you.</p><p><li>Develop and memorize a catchy tagline to say as you hand out your card, especially if your card isn't particularly unusual or useful.</p><p></ul></p><p>Stuck with boring or generic company-designed cards? Create your own online and choose from thousands of business card templates for a truly unique design.</p>
+<p>About The Author</p><p>Diana Ratliff of GreatFX Business Cards helps business people get great business results through effective business card marketing. You can get more free articles and order business cards online at the company website, <a href="http://www.greatfxbusinesscards.com" target="_new">http://www.greatfxbusinesscards.com</a>.</p><p><a href="mailto:info@greatfxbusinesscards.com">info@greatfxbusinesscards.com</a></p><p>

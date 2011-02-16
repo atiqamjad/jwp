@@ -7,12 +7,14 @@
 <p>One two, three four 5 six seven eight nine not wrap h3 tag!</p>
 <br  />
 Begin unordered list #1
-<li>item1 of the unordered list #1
-<li>item2 of the unordered list #1
-<li>item3 of the unordered list #1
-<li>  item4 of the unordered list #1
-<li>item5 of the unordered list #1
-<li>item6 of the unordered list #1<li>item7 of the unordered list #1
+<li>item1 of the unordered list #1.
+<li>item2 
+
+of the unordered list #1?</li>
+<li>item3 of the unordered list #1!</li><li>  item4 of the unordered list #1
+
+<li>item5 of the unordered list #1;
+<li>item6 of the unordered list #1$<li>item7 of the unordered list #1
 
 Begin ordered list #1
 1)item1 of the ordered list #1

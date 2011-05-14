@@ -1,15 +1,8 @@
-/**
- * $HeadURL: http://svn.isida.by:3690/svn/is.acps/trunk/systems/is.acps/solutions/dbaccess/services/core/projects/lib/src/isida/acps/service/dbaccess/core/dbmanager/DBManagerFactory.java $
- * $Revision: 1216 $
- * $Date:: 2010-11-04 21:39:41 +0200 #$
- *
- * Copyright (c) Isida-Informatica, Ltd. All Rights Reserved.
- */
 package com.samsonych.service.dba;
 
 /**
  * Фабрика DB-менеджеров (Spring Beans).
- * 
+ *
  * @author S.Samsonov
  * @version $Id: DBManagerFactory.java 1216 2010-11-04 19:39:41Z homyakov $
  */

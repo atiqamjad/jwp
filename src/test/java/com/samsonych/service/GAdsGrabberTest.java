@@ -53,8 +53,8 @@ public class GAdsGrabberTest {
 				"articles and information on Credit"));
 	}
 
-	@Test
-	//@Ignore
+	// @Test
+	@Ignore
 	public final void testProcessContent() throws IOException {
 		String test = FileUtils.readFileToString(TestUtil
 				.getTestFile("test1.txt"));

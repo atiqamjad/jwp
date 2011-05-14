@@ -1,10 +1,3 @@
-/**
- * $HeadURL: http://svn.isida.by:3690/svn/is.acps/trunk/systems/is.acps/solutions/dbaccess/services/core/projects/lib/src/isida/acps/service/dbaccess/core/dbmanager/BeanFactory.java $
- * $Revision: 1185 $
- * $Date:: 2010-11-03 20:50:56 +0200 #$
- *
- * Copyright (c) Isida-Informatica, Ltd. All Rights Reserved.
- */
 package com.samsonych.service.dba;
 
 import is.ida.lib.spring.SpringApplicationContext;

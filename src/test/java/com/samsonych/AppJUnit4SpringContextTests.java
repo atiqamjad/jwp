@@ -1,10 +1,3 @@
-/**
- * $HeadURL: http://svn.isida.by:3690/svn/is.acps/branches/is.acps_wtp/solutions/tests/services/junit/projects/lib/src/isida/acps/lib/tests/junit/ACPSJUnit4SpringContextTests.java $
- * $Revision: 1014 $
- * $Date:: 2010-10-23 14:52:30 +0300 #$
- *
- * Copyright (c) Isida-Informatica, Ltd. All Rights Reserved.
- */
 package com.samsonych;
 
 import is.ida.lib.service.exception.ServiceException;

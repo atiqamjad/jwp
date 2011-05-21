@@ -14,7 +14,7 @@ import javax.persistence.UniqueConstraint;
  * The Options set under the Administration > Settings panel.
  */
 @Entity
-@Table(name = "wp_options", uniqueConstraints = @UniqueConstraint(columnNames = "option_name"))
+@Table(name = "options", uniqueConstraints = @UniqueConstraint(columnNames = "option_name"))
 public class Option implements java.io.Serializable {
 
 	private static final long serialVersionUID = 9143025689128920908L;

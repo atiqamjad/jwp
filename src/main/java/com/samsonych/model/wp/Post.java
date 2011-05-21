@@ -28,7 +28,7 @@ import javax.persistence.Transient;
  * The core of the WordPress data.
  */
 @Entity
-@Table(name = "wp_posts")
+@Table(name = "posts")
 public class Post implements java.io.Serializable {
 
     private static final long serialVersionUID = -3853310933943629341L;
@@ -232,7 +232,7 @@ public class Post implements java.io.Serializable {
     }
 
     @OneToMany(cascade = { CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE }, fetch = FetchType.LAZY)
-    @JoinTable(name = "wp_term_relationships", joinColumns = @JoinColumn(name = "object_id", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "term_taxonomy_id", referencedColumnName = "term_taxonomy_id"))
+    @JoinTable(name = "term_relationships", joinColumns = @JoinColumn(name = "object_id", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "term_taxonomy_id", referencedColumnName = "term_taxonomy_id"))
     // @MapKeyColumn(name = "term_order")
     @OrderColumn(name = "term_order", insertable = true, nullable = false)
     public List<Taxonomy> getTaxonomies() {

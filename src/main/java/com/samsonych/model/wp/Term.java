@@ -24,7 +24,7 @@ import org.hibernate.annotations.LazyToOneOption;
  * The categories for both posts and links and the tags for posts.
  */
 @Entity
-@Table(name = "wp_terms", uniqueConstraints = @UniqueConstraint(columnNames = "slug"))
+@Table(name = "terms", uniqueConstraints = @UniqueConstraint(columnNames = "slug"))
 @org.hibernate.annotations.Entity(dynamicInsert = false, dynamicUpdate = false)
 public class Term implements java.io.Serializable {
 

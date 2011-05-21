@@ -20,7 +20,7 @@ import javax.persistence.UniqueConstraint;
  * This table describes the taxonomy (category, link, or tag).
  */
 @Entity
-@Table(name = "wp_term_taxonomy", uniqueConstraints = @UniqueConstraint(columnNames = { "term_id",
+@Table(name = "term_taxonomy", uniqueConstraints = @UniqueConstraint(columnNames = { "term_id",
         "taxonomy" }))
 @org.hibernate.annotations.Entity(dynamicInsert = true, dynamicUpdate = true)
 public class Taxonomy implements java.io.Serializable {

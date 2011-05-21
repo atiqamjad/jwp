@@ -9,7 +9,7 @@
  set CP=!CP!"
  rem echo !CP!
 
- java -cp %CP% com.samsonych.Main
+ java -cp %CP% com.samsonych.project.gads.Main
 
 goto :EOF
 @rem ';
@@ -20,4 +20,4 @@ do
   CP=${CP}:${i}
 done
 #echo ${CP}
-java -cp ${CP} com.samsonych.Main
+java -cp ${CP} com.samsonych.project.gads.Main

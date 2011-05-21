@@ -33,7 +33,7 @@
 	<!-- </bean> -->
 	<context:property-placeholder location="classpath:conf/app.properties" />
 
-	<bean id="appConfig" class="com.samsonych.AppConfig">
+	<bean id="appConfig" class="com.samsonych.jwp.config.AppConfig">
 		<property name="gadsDir" value="${gadsDir}" />
 	</bean>
 
@@ -74,12 +74,12 @@
 
 		<property name="packagesToScan">
 			<list>
-				<value>com.samsonych.model.wp.**</value>
+				<value>com.samsonych.jwp.model.**</value>
 			</list>
 		</property>
 
 		<property name="namingStrategy">
-			<bean class="com.samsonych.service.dba.JWPNamingStrategy">
+			<bean class="com.samsonych.jwp.service.dba.JWPNamingStrategy">
 				<property name="tablePrefix" value="${prefix}_" />
 			</bean>
 		</property>
@@ -132,7 +132,7 @@
 
 	<!-- BUSINESS OBJECT DEFINITIONS -->
 
-	<bean id="baseDBManager" class="com.samsonych.service.dba.BaseDBManagerImpl"
+	<bean id="baseDBManager" class="com.samsonych.jwp.service.dba.BaseDBManagerImpl"
 		scope="prototype">
 		<property name="baseDAO" ref="baseDAO" />
 	</bean>

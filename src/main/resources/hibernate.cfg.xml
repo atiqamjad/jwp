@@ -4,15 +4,15 @@
 <hibernate-configuration>
 	<session-factory>
 		<!-- Annotated mapping classes -->
-		<mapping class="com.samsonych.model.wp.Comment" />
-		<mapping class="com.samsonych.model.wp.CommentMeta" />
-		<mapping class="com.samsonych.model.wp.Link" />
-		<mapping class="com.samsonych.model.wp.Option" />
-		<mapping class="com.samsonych.model.wp.Post" />
-		<mapping class="com.samsonych.model.wp.PostMeta" />
-		<mapping class="com.samsonych.model.wp.Term" />
-		<mapping class="com.samsonych.model.wp.Taxonomy" />
-		<mapping class="com.samsonych.model.wp.User" />
-		<mapping class="com.samsonych.model.wp.UserMeta" />
+		<mapping class="com.samsonych.jwp.model.Comment" />
+		<mapping class="com.samsonych.jwp.model.CommentMeta" />
+		<mapping class="com.samsonych.jwp.model.Link" />
+		<mapping class="com.samsonych.jwp.model.Option" />
+		<mapping class="com.samsonych.jwp.model.Post" />
+		<mapping class="com.samsonych.jwp.model.PostMeta" />
+		<mapping class="com.samsonych.jwp.model.Term" />
+		<mapping class="com.samsonych.jwp.model.Taxonomy" />
+		<mapping class="com.samsonych.jwp.model.User" />
+		<mapping class="com.samsonych.jwp.model.UserMeta" />
 	</session-factory>
 </hibernate-configuration>

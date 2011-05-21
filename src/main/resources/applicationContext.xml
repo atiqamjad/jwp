@@ -80,7 +80,7 @@
 
 		<property name="namingStrategy">
 			<bean class="com.samsonych.jwp.service.dba.JWPNamingStrategy">
-				<property name="tablePrefix" value="${prefix}_" />
+				<property name="tablePrefix" value="${prefix}" />
 			</bean>
 		</property>
 	</bean>

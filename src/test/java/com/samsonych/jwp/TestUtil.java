@@ -1,18 +1,19 @@
 package com.samsonych.jwp;
 
-import is.ida.lib.service.exception.ServiceException;
-
 import java.io.File;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import org.junit.Ignore;
+
 import com.samsonych.jwp.service.IWPGrabber;
 import com.samsonych.project.gads.GAdsGrabber;
 
+@Ignore
 public class TestUtil {
 	public static final String TEST_FILE = "7777.php";
 
-	public static IWPGrabber initGrabber() throws ServiceException {
+	public static IWPGrabber initGrabber() {
 		IWPGrabber result = new GAdsGrabber();
 		result.grab(getGadsTestFile());
 		return result;

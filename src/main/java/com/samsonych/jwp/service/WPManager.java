@@ -28,32 +28,26 @@ public class WPManager {
 
 	private static final Logger LOG = Logger.getLogger(WPManager.class);
 
-	private static BaseDBManagerImpl postManager;
-	private static BaseDBManagerImpl userManager;
-	private static BaseDBManagerImpl taxonomyManager;
-
-	public WPManager() {
-		postManager = DBManagerFactory.getBaseDBManager(Post.class);
-		userManager = DBManagerFactory.getBaseDBManager(User.class);
-		taxonomyManager = DBManagerFactory.getBaseDBManager(Taxonomy.class);
-	}
+	private static BaseDBManagerImpl postDBM = DBManagerFactory.getBaseDBManager(Post.class);
+	private static BaseDBManagerImpl userDBM = DBManagerFactory.getBaseDBManager(User.class);
+	private static BaseDBManagerImpl taxonomyDBM = DBManagerFactory.getBaseDBManager(Taxonomy.class);
 
 	public Post saveOrUpdatePost(final Post post) throws ServiceException {
-		return (Post) postManager.saveOrUpdate(post);
+		return (Post) postDBM.saveOrUpdate(post);
 	}
 
 	public Taxonomy saveOrUpdateTaxonomy(final Taxonomy taxonomy)
 			throws ServiceException {
-		return (Taxonomy) taxonomyManager.saveOrUpdate(taxonomy);
+		return (Taxonomy) taxonomyDBM.saveOrUpdate(taxonomy);
 	}
 
 	public User getUserById(final Long id) throws ServiceException {
-		return (User) userManager.getById(id);
+		return (User) userDBM.getById(id);
 	}
 
 	public List<Taxonomy> saveOrUpdateTaxonomyAll(
 			final List<Taxonomy> taxonomies) throws ServiceException {
-		return taxonomyManager.saveOrUpdateAll(taxonomies);
+		return taxonomyDBM.saveOrUpdateAll(taxonomies);
 	}
 
 	public Taxonomy getTaxonomyTag(final String tag) throws ServiceException {
@@ -68,7 +62,7 @@ public class WPManager {
 	public Taxonomy getTaxonomy(final String taxonomy, final TaxonomyType type)
 			throws ServiceException {
 		String hqlQuery = String.format(HQL_TAXONOMY, taxonomy, type);
-		List<Taxonomy> taxonomies = taxonomyManager.executeHQLQuery(hqlQuery);
+		List<Taxonomy> taxonomies = taxonomyDBM.executeHQLQuery(hqlQuery);
 		return taxonomies.equals(Collections.EMPTY_LIST) ? null : taxonomies
 				.get(0);
 	}
@@ -78,7 +72,7 @@ public class WPManager {
 		String hqlQuery = String.format("delete " + HQL_TAXONOMY,
 				StringUtils.join(tags, "','"), TaxonomyType.post_tag);
 		// TODO executeUpdateHQL
-		taxonomyManager.executeHQLQuery(hqlQuery);
+		taxonomyDBM.executeHQLQuery(hqlQuery);
 		return 1;
 	}
 

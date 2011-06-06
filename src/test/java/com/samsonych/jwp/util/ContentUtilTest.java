@@ -8,7 +8,6 @@ import static com.samsonych.jwp.util.ContentUtil.normalizePostName;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashSet;
 import java.util.Set;
@@ -29,15 +28,17 @@ public class ContentUtilTest {
 	static File stopWordsFile = new File("target/test-classes" + STOP_WORDS_TXT);
 
 	@BeforeClass
-	public static void setUp() throws IOException {
+	public static void setUp() throws FileNotFoundException {
 		createTestStopListFile(stopWordsFile);
 		ClassPathResource resource = new ClassPathResource(STOP_WORDS_TXT);
 		stopWords = loadStopWordsFromFile(resource);
 	}
 
 	@AfterClass
-	public static void tearDown() throws IOException {
-		stopWordsFile.delete();
+	public static void tearDown() {
+		if (stopWordsFile != null) {
+			stopWordsFile.delete();
+		}
 	}
 
 	@Test

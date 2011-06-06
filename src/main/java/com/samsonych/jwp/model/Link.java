@@ -19,6 +19,7 @@ import javax.persistence.TemporalType;
 @Table(name = "links")
 public class Link implements java.io.Serializable {
 
+	private static final long serialVersionUID = -645504345517736896L;
 	private Long linkId;
 	private String linkUrl;
 	private String linkName;

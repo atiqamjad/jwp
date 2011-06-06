@@ -37,7 +37,7 @@ public enum PostStatus {
 
 	public static PostStatus fromValue(final String status) {
 		for (PostStatus s : PostStatus.values()) {
-			if (s.status == status) {
+			if (s.status.equals(status)) {
 				return s;
 			}
 		}

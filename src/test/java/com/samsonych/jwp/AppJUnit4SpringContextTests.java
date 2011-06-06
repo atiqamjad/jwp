@@ -3,7 +3,7 @@ package com.samsonych.jwp;
 import is.ida.lib.service.exception.ServiceException;
 
 import org.apache.log4j.Logger;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
@@ -22,15 +22,19 @@ abstract public class AppJUnit4SpringContextTests extends
 
 	protected Logger log = Logger.getLogger(getClass());
 
-	protected static BaseDBManagerImpl baseDBManager;
+	protected static BaseDBManagerImpl baseDBManager = DBManagerFactory.getBaseDBManager();
 	protected static IWPGrabber grabber;
 
-	@Before
-	public void initialize() throws ServiceException {
-		DBManagerFactory.setApplicationContext(applicationContext);
+//	@Before
+	@BeforeClass
+	public static void initialize() throws ServiceException {
+		//DBManagerFactory.setApplicationContext(applicationContext);
+		/*
 		if (baseDBManager == null) {
 			baseDBManager = DBManagerFactory.getBaseDBManager();
 			grabber = TestUtil.initGrabber();
 		}
+		*/
+		grabber = TestUtil.initGrabber();
 	}
 }

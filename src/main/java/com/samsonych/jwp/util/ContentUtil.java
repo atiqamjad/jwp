@@ -75,7 +75,8 @@ public final class ContentUtil {
 			while (bf.ready()) {
 				result.add(bf.readLine());
 			}
-			fin.close();
+			bf.close();
+			fin.close();			
 		} catch (FileNotFoundException ex) {
 			LOG.error("File with stop words not found!", ex);
 		} catch (IOException ex) {

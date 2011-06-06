@@ -15,19 +15,17 @@ import com.samsonych.jwp.TestUtil;
 import com.samsonych.jwp.model.Post;
 import com.samsonych.jwp.model.Taxonomy;
 import com.samsonych.jwp.model.TaxonomyType;
-import com.samsonych.jwp.service.Poster;
-import com.samsonych.jwp.service.WPManager;
 import com.samsonych.jwp.util.ContentUtilTest;
 
 public class PosterTest extends AppJUnit4SpringContextTests {
 
-	private Poster poster;
+	private Poster poster = new Poster(grabber);
 
-	@Override
-	public void initialize() throws ServiceException {
-		super.initialize();
-		poster = new Poster(grabber);
-	}
+//	@BeforeClass
+//	public static void initialize() throws ServiceException {
+//		super.initialize();
+//		poster = new Poster(grabber);
+//	}
 
 	@SuppressWarnings("unchecked")
 	@Test

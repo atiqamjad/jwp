@@ -1,29 +1,25 @@
 package com.samsonych.jwp.service;
 
-import is.ida.lib.service.exception.ServiceException;
-
 import java.io.IOException;
 
 import junit.framework.Assert;
 
 import org.apache.commons.io.FileUtils;
-import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
 import com.samsonych.jwp.TestUtil;
-import com.samsonych.jwp.service.IWPGrabber;
 import com.samsonych.jwp.util.ContentUtilTest;
 import com.samsonych.project.gads.GAdsGrabber;
 
 public class GAdsGrabberTest {
 
-	protected static IWPGrabber grabber;
+	protected static IWPGrabber grabber = TestUtil.initGrabber();
 
-	@Before
-	public void initialize() throws ServiceException {
-		grabber = TestUtil.initGrabber();
-	}
+//	@Before
+//	public void initialize() throws ServiceException {
+//		grabber = TestUtil.initGrabber();
+//	}
 
 	@Test
 	public final void testGetPostTitle() {

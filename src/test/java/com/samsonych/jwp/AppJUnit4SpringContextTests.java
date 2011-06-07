@@ -12,29 +12,21 @@ import com.samsonych.jwp.service.dba.BaseDBManagerImpl;
 import com.samsonych.jwp.service.dba.DBManagerFactory;
 
 /**
- * @author S.Samsonov
- * @version $Id: ACPSJUnit4SpringContextTests.java 1014 2010-10-23 11:52:30Z
- *          homyakov $
+ * 
+ * @author samsonych
+ * 
  */
 @ContextConfiguration(locations = { "classpath:applicationContext.xml" })
 abstract public class AppJUnit4SpringContextTests extends
 		AbstractJUnit4SpringContextTests {
 
 	protected Logger log = Logger.getLogger(getClass());
-
-	protected static BaseDBManagerImpl baseDBManager = DBManagerFactory.getBaseDBManager();
+	protected static BaseDBManagerImpl baseDBManager = DBManagerFactory
+			.getBaseDBManager();
 	protected static IWPGrabber grabber;
 
-//	@Before
 	@BeforeClass
 	public static void initialize() throws ServiceException {
-		//DBManagerFactory.setApplicationContext(applicationContext);
-		/*
-		if (baseDBManager == null) {
-			baseDBManager = DBManagerFactory.getBaseDBManager();
-			grabber = TestUtil.initGrabber();
-		}
-		*/
 		grabber = TestUtil.initGrabber();
 	}
 }

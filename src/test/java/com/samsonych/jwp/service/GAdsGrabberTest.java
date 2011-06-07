@@ -16,11 +16,6 @@ public class GAdsGrabberTest {
 
 	protected static IWPGrabber grabber = TestUtil.initGrabber();
 
-//	@Before
-//	public void initialize() throws ServiceException {
-//		grabber = TestUtil.initGrabber();
-//	}
-
 	@Test
 	public final void testGetPostTitle() {
 		Assert.assertEquals(ContentUtilTest.EXPECTED_TITLE,

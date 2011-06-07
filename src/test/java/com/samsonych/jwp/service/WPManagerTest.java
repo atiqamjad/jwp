@@ -13,15 +13,16 @@ import com.samsonych.jwp.service.WPManager;
 
 /**
  * @author samsonov
- *
+ * 
  */
+@Ignore
 public class WPManagerTest extends AppJUnit4SpringContextTests {
 
 	/**
 	 * Test method for
 	 * {@link com.samsonych.jwp.jwp.service.WPManager#deleteTaxonomies(java.lang.String[])}
 	 * .
-	 *
+	 * 
 	 * @throws ServiceException
 	 */
 	@Test

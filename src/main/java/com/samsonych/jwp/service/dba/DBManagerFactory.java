@@ -1,5 +1,7 @@
 package com.samsonych.jwp.service.dba;
 
+import is.ida.service.manager.BeanFactory;
+
 public final class DBManagerFactory extends BeanFactory {
 
 	public static final String BASE_MANAGER_BEAN = "baseDBManager";

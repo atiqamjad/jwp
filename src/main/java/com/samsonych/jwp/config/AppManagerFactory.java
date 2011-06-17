@@ -1,6 +1,6 @@
 package com.samsonych.jwp.config;
 
-import com.samsonych.jwp.service.dba.BeanFactory;
+import is.ida.service.manager.BeanFactory;
 
 public final class AppManagerFactory extends BeanFactory {
 

@@ -4,6 +4,7 @@
 package com.samsonych.project.gads;
 
 import is.ida.lib.service.exception.ServiceException;
+import is.ida.service.manager.AppContext;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -11,6 +12,7 @@ import java.util.Arrays;
 
 import org.apache.commons.io.filefilter.DirectoryFileFilter;
 import org.apache.log4j.Logger;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.samsonych.jwp.config.AppManagerFactory;
 import com.samsonych.jwp.model.Post;
@@ -22,10 +24,13 @@ import com.samsonych.jwp.service.WPManager;
  * 
  */
 public class Main {
+	private static final String LOC = "classpath:/spring/context.xml";
+	private static final ClassPathXmlApplicationContext CTX = new ClassPathXmlApplicationContext(
+			LOC);
 	private static Logger LOG = Logger.getLogger(Main.class);
 
 	public static void main(final String[] args) {
-
+		AppContext.setApplicationContext(CTX);
 		String gadsDir = AppManagerFactory.getAppConfig().getGadsDir();
 		LOG.debug("gadsDir=" + gadsDir);
 
@@ -35,7 +40,8 @@ public class Main {
 		int countPosts = 0;
 
 		Poster poster = new Poster(new GAdsGrabber());
-
+		poster.setWpManager(new WPManager());
+		
 		for (String niche : nicheDirs) {
 			// niche = category
 

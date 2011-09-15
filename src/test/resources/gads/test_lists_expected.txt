@@ -1,0 +1,26 @@
+Begin unordered list #1
+<ul>
+<li>item1 of the unordered list #1</li>
+<li>item2 of the unordered list #1</li>
+<li>item3 of the unordered list #1</li>
+<li>item4 of the unordered list #1</li>
+<li>item5 of the unordered list #1</li>
+<li>item6 of the unordered list #1</li>
+<li>item7 of the unordered list #1</li>
+</ul>
+
+Begin ordered list #1
+<ol>
+<li>item1 of the ordered list #1</li>
+<li>item2 of the ordered list #1</li>
+<li>item3 of the ordered list #1</li>
+<li>item4 of the ordered list #1</li>
+</ol>
+
+Begin ordered list #2
+<ol>
+<li>item1 of the ordered list #2</li>
+<li>item2 of the ordered list #2</li>
+<li>item3 of the ordered list #2</li>
+<li>item4 of the ordered list #2</li>
+</ol>

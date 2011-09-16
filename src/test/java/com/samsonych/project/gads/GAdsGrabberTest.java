@@ -57,13 +57,20 @@ public class GAdsGrabberTest {
     }
 
     @Test
-    public final void testProcessContent1() throws IOException {
-        testProcessContent("test_headers.txt", "test_headers_expected.txt");
+    public final void testParseHeaders() throws IOException {
+        testProcessContent("headers.txt", "headers_expected.txt");
     }
 
     @Test
     // @Ignore
-    public final void testProcessContent2() throws IOException {
-        testProcessContent("test_lists.txt", "test_lists_expected.txt");
+    public final void testParseLists() throws IOException {
+        testProcessContent("lists.txt", "lists_expected.txt");
     }
+
+    @Test
+     @Ignore
+    public final void testParseClearFooter() throws IOException {
+        testProcessContent("footer.txt", "footer_expected.txt");
+    }
+
 }
